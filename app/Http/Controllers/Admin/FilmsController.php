@@ -9,6 +9,7 @@ use App\Http\Requests\CreateRequest;
 use App\Services\FilmService;
 use App\Models\Film;
 
+
 class FilmController extends Controller
 {
     protected $filmService;
@@ -49,7 +50,7 @@ class FilmController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  App\Http\Requests\CreateRequest  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(CreateRequest $request) : RedirectResponse
     {
@@ -61,10 +62,10 @@ class FilmController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Film  $film
-     * @return \Illuminate\Http\Response
+     * @param  int  $id
+     * @return \Illuminate\View\View
      */
-    public function show(Film $film)
+    public function show($id)
     {
         //
     }
@@ -72,10 +73,10 @@ class FilmController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Film  $film
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Film $film)
+    public function edit($id)
     {
         //
     }
@@ -84,10 +85,10 @@ class FilmController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Film  $film
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Film $film)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -95,10 +96,10 @@ class FilmController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Film  $film
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Film $film)
+    public function destroy($id)
     {
         //
     }

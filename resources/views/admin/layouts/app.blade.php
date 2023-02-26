@@ -2,26 +2,29 @@
 
 @section('sidebar')
     <div>
-        <div class="d-flex justify-content-start">
-            <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm mt-1">
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link btn btn-outline-primary mx-3 mb-2" href="#">Active</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link btn btn-outline-primary mx-3 mb-2" href="#">Link</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link btn btn-outline-primary mx-3 mb-2" href="#">Link</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link btn btn-outline-primary mx-3 mb-2" href="#">Disabled</a>
-                    </li>
-                </ul>
-            </nav>
+        <div class="d-flex flex-column bg-white shadow-sm p-3 mt-1" style="width: 15%; height: 100%; position: fixed">
+            <ul class="nav nav-pills flex-column mt-3">
+                <li class="nav-item row mx-2 mb-3">
+                    <a href="{{ route('films.index') }}" class="btn btn-outline-primary text-start">
+                        Фильмы
+                    </a>
+                </li>
+                <li class="nav-item row mx-2 mb-3">
+                    <a href="#" class="btn btn-outline-primary text-start">
+                        Расписание
+                    </a>
+                </li>
+                <li class="nav-item row mx-2 mb-3">
+                    <a href="#" class="btn btn-outline-primary text-start">
+                        Залы кинотеатра
+                    </a>
+                </li>
+                <li class="nav-item row mx-2 mb-3">
+                    <a href="#" class="btn btn-outline-primary text-start">
+                        Бронирование
+                    </a>
+                </li>
+            </ul>
         </div>
-        <main class="py-4">
-            @yield('content')
-        </main>
     </div>
 @endsection

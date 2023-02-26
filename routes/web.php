@@ -30,4 +30,6 @@ Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 // Admin
 Route::get('/admin', [AdminController::class, 'index'])->name('admin');
 
-// Film
+// Films
+Route::get('/admin/films', [FilmController::class, 'index'])->name('films.index');
+Route::get('/admin/films/{film}', [FilmController::class, 'show'])->name('films.show');
