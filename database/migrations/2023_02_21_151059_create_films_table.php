@@ -17,7 +17,7 @@ class CreateFilmsTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('genres');
-            $table->integer('age_limit');
+            $table->string('age_limit');
             $table->time('duration');
             $table->text('synopsis');
             $table->string('poster')->nullable();

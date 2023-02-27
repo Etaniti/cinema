@@ -32,4 +32,10 @@ Route::get('/admin', [AdminController::class, 'index'])->name('admin');
 
 // Films
 Route::get('/admin/films', [FilmController::class, 'index'])->name('films.index');
+Route::get('/admin/films/create', [FilmController::class, 'create'])->name('films.create');
+Route::post('/admin/films', [FilmController::class, 'store'])->name('films.store');
 Route::get('/admin/films/{film}', [FilmController::class, 'show'])->name('films.show');
+Route::get('/admin/films/{film}/edit', [FilmController::class, 'edit'])->name('films.edit');
+Route::patch('/admin/films/{film}', [FilmController::class, 'update'])->name('films.update');
+Route::get('/admin/films/{film}/delete', [FilmController::class, 'delete'])->name('films.delete');
+Route::delete('/admin/films/{film}', [FilmController::class, 'destroy'])->name('films.destroy');

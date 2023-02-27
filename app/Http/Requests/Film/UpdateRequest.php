@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Films;
+namespace App\Http\Requests\Film;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -26,8 +26,8 @@ class UpdateRequest extends FormRequest
         return [
             'title' => ['required', 'string', 'max:100'],
             'genres' => ['required', 'string'],
-            'age_limit' => ['required', 'integer'],
-            'duration' => ['required', 'time'],
+            'age_limit' => ['required', 'string'],
+            'duration' => ['required'],
             'synopsis' => ['required', 'string', 'max:2000'],
             'poster' => ['nullable', 'image', 'mimes:jpeg,png,jpg', 'max: 3999'],
         ];
