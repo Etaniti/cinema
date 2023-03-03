@@ -41,7 +41,7 @@ class FilmPolicy
      */
     public function create(User $user)
     {
-        $user->hasRole('admin');
+        return $user->hasRole('admin');
     }
 
     /**
@@ -53,7 +53,7 @@ class FilmPolicy
      */
     public function update(User $user, Film $film)
     {
-        $user->hasRole('admin');
+        return $user->hasRole('admin');
     }
 
     /**
@@ -65,7 +65,7 @@ class FilmPolicy
      */
     public function delete(User $user, Film $film)
     {
-        $user->hasRole('admin');
+        return $user->hasRole('admin');
     }
 
     /**

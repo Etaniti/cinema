@@ -28,14 +28,14 @@
                         <p class="text-center">{{ $film->genres }}</p>
                     </div>
                     <div>
-                        <a href="{{ route('films.show', ['film' => $film->id]) }}"
+                        <a href="{{ route('admin_films.show', ['film' => $film->id]) }}"
                             class="btn btn-outline-primary px-5">Подробнее</a>
                     </div>
                 </div>
             @endforeach
         </div>
         <div class="d-flex flex-column align-items-center mt-5">
-            <a href="{{ route('films.create') }}" class="btn btn-primary row col-6 py-3">Добавить фильм</a>
+            <a href="{{ route('admin_films.create') }}" class="btn btn-primary row col-6 py-3">Добавить фильм</a>
         </div>
     </div>
 @endsection

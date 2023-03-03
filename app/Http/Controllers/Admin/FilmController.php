@@ -60,7 +60,7 @@ class FilmController extends Controller
         $data = $request->validated();
         $poster = $request->poster;
         $film = $this->filmService->store($data, $poster);
-        return redirect()->route('films.index');
+        return redirect()->route('admin_films.index');
     }
 
     /**
@@ -97,7 +97,7 @@ class FilmController extends Controller
         $id = $film->id;
         $data = $request->validated();
         $film = $this->filmService->update($data, $film);
-        return redirect()->route('films.show', $id);
+        return redirect()->route('admin_films.show', $id);
     }
 
     /**
@@ -120,6 +120,6 @@ class FilmController extends Controller
     public function destroy(Film $film): RedirectResponse
     {
         $film = $this->filmService->destroy($film->id);
-        return redirect()->route('films.index');
+        return redirect()->route('admin_films.index');
     }
 }

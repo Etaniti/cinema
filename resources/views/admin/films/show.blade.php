@@ -28,9 +28,9 @@
                     <p class="text-wrap mb-5" style="width: 400px;"><b>Описание: </b>{{ $film->synopsis }}</p>
                     @role('admin')
                         <div class="d-flex flex-column col-8">
-                            <a href="{{ route('films.edit', ['film' => $film->id]) }}"
+                            <a href="{{ route('admin_films.edit', ['film' => $film->id]) }}"
                                 class="btn btn-outline-primary px-5 py-2 mb-2">Редактировать</a>
-                            <a href="{{ route('films.delete', ['film' => $film->id]) }}"
+                            <a href="{{ route('admin_films.delete', ['film' => $film->id]) }}"
                                 class="btn btn-outline-danger px-5 py-2">Удалить</a>
                         </div>
                     @endrole

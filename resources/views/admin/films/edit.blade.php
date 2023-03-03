@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="d-flex justify-content-center">
-            <form action="{{ route('films.update', ['film' => $film->id]) }}" enctype="multipart/form-data" method="POST">
+            <form action="{{ route('admin_films.update', ['film' => $film->id]) }}" enctype="multipart/form-data" method="POST">
                 @csrf
                 @method('PATCH')
 

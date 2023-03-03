@@ -1,5 +1,3 @@
-@extends('admin.layouts.app')
-
 @section('content')
     <div class="container">
         <div class="d-flex flex-wrap flex-column offset-2" style="width: 70%;">

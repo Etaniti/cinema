@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="d-flex justify-content-center">
-            <form action="{{ route('films.store') }}" enctype="multipart/form-data" method="POST">
+            <form action="{{ route('admin_films.store') }}" enctype="multipart/form-data" method="POST">
                 @csrf
                 <div class="card px-4 py-3 mt-5 mb-5">
                     <div class="card-body">
@@ -16,16 +16,6 @@
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
-
-                        {{-- @livewire('genre', ['genres' => $genres]) --}}
-
-                        {{-- <div class="mb-3 row">
-                            <label for="genres" class="col-form-label fw-bold">Жанры</label>
-                            <input type="text" class="form-control" name="genres">
-                            @error('genres')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div> --}}
 
                         <div class="mb-3 row">
                             <label for="genres" class="col-form-label fw-bold">Жанры</label>

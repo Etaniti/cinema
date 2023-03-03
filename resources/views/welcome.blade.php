@@ -25,10 +25,10 @@
                     </p>
                     <p class="text-center">{{ $film->genres }}</p>
                     @role('admin')
-                        <a href="{{ route('films.show', ['film' => $film->id]) }}"
+                        <a href="{{ route('admin_films.show', ['film' => $film->id]) }}"
                             class="btn btn-outline-primary px-5">Подробнее</a>
                     @else
-                        <a href="{{ route('films.show', ['film' => $film->id]) }}"
+                        <a href="{{ route('user_films.show', ['film' => $film->id]) }}"
                             class="btn btn-outline-primary px-5">Подробнее</a>
                     @endrole
                 </div>
