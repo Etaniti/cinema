@@ -15,13 +15,27 @@ class FilmService
      */
     public function store($data, $poster): Film
     {
+        $data['genres'] = implode(', ', (array) $data['genres']);
+
         if ($poster !== null) {
             $file = $data['poster'];
             $path = Storage::putFile('public/images', $file, 'public');
             $data['poster'] = $path;
         }
 
-        return Film::create($data);
+        // if ($poster !== null) {
+        //     $path = $poster->store('public/images');
+        //     $visibility = Storage::getVisibility($path);
+        //     Storage::setVisibility($path, 'public');
+        //     $data['poster'] = $path;
+        // }
+
+        // if ($poster !== null) {
+        //     $path = $poster->store('images', 'public');
+        //     $data['poster'] = $path;
+        // }
+
+        return $film = Film::create($data);
     }
 
     /**
@@ -31,9 +45,8 @@ class FilmService
      * @param  mixed $id
      * @return bool
      */
-    public function update($data, $id): bool
+    public function update($data, Film $film): bool
     {
-        $film = Film::findOrFail($id);
         return $film->update($data);
     }
 

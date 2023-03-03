@@ -25,7 +25,7 @@ class UpdateRequest extends FormRequest
     {
         return [
             'title' => ['required', 'string', 'max:100'],
-            'genres' => ['required', 'string'],
+            'genres' => ['required'],
             'age_limit' => ['required', 'string'],
             'duration' => ['required'],
             'synopsis' => ['required', 'string', 'max:2000'],

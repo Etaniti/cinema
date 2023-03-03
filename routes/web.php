@@ -1,11 +1,11 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\FilmController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\User\ProfileController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +16,7 @@ use App\Http\Controllers\Admin\FilmController;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 
 Route::get('/', [HomeController::class, 'index'])->name('welcome');
 
@@ -25,17 +25,18 @@ Auth::routes();
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
 // User
-//
+Route::resource('profile', ProfileController::class)->only([
+    'index', 'edit', 'update',
+])->parameters([
+    'profile' => 'user',
+]);
+
+// Films
+
 
 // Admin
 Route::get('/admin', [AdminController::class, 'index'])->name('admin');
 
 // Films
-Route::get('/admin/films', [FilmController::class, 'index'])->name('films.index');
-Route::get('/admin/films/create', [FilmController::class, 'create'])->name('films.create');
-Route::post('/admin/films', [FilmController::class, 'store'])->name('films.store');
-Route::get('/admin/films/{film}', [FilmController::class, 'show'])->name('films.show');
-Route::get('/admin/films/{film}/edit', [FilmController::class, 'edit'])->name('films.edit');
-Route::patch('/admin/films/{film}', [FilmController::class, 'update'])->name('films.update');
 Route::get('/admin/films/{film}/delete', [FilmController::class, 'delete'])->name('films.delete');
-Route::delete('/admin/films/{film}', [FilmController::class, 'destroy'])->name('films.destroy');
+Route::resource('admin/films', FilmController::class);

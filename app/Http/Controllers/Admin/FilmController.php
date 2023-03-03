@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Film\CreateRequest;
 use App\Http\Requests\Film\UpdateRequest;
+use App\Models\DefaultGenre;
 use App\Models\Film;
 use App\Services\FilmService;
 use Illuminate\Http\RedirectResponse;
@@ -22,6 +23,7 @@ class FilmController extends Controller
      */
     public function __construct(FilmService $filmService)
     {
+        $this->authorizeResource(Film::class, 'film');
         $this->filmService = $filmService;
     }
 
@@ -43,7 +45,8 @@ class FilmController extends Controller
      */
     public function create(): View
     {
-        return view('admin.films.create');
+        $default_genres = DefaultGenre::all();
+        return view('admin.films.create', compact('default_genres'));
     }
 
     /**
@@ -63,62 +66,60 @@ class FilmController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Film  $film
      * @return \Illuminate\View\View
      */
-    public function show($id): View
+    public function show(Film $film): View
     {
-        $film = Film::findOrFail($id);
         return view('admin.films.show', compact('film'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Film  $film
      * @return \Illuminate\View\View
      */
-    public function edit($id): View
+    public function edit(Film $film): View
     {
-        $film = Film::findOrFail($id);
         return view('admin.films.edit', compact('film'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  App\Http\Requests\Films\UpdateRequest  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Film  $film
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(UpdateRequest $request, $id): RedirectResponse
+    public function update(UpdateRequest $request, Film $film): RedirectResponse
     {
+        $id = $film->id;
         $data = $request->validated();
-        $film = $this->filmService->update($data, $id);
-        return redirect()->route('films.show', ['film' => $id]);
+        $film = $this->filmService->update($data, $film);
+        return redirect()->route('films.show', $id);
     }
 
     /**
      * Show the form for deleting the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Film  $film
      * @return \Illuminate\View\View
      */
-    public function delete($id): View
+    public function delete(Film $film): View
     {
-        $film = Film::findOrFail($id);
         return view('admin.films.delete', compact('film'));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Film  $film
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy($id): RedirectResponse
+    public function destroy(Film $film): RedirectResponse
     {
-        $film = $this->filmService->destroy($id);
+        $film = $this->filmService->destroy($film->id);
         return redirect()->route('films.index');
     }
 }

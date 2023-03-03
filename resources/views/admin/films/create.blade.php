@@ -17,12 +17,32 @@
                             @enderror
                         </div>
 
-                        <div class="mb-3 row">
+                        {{-- @livewire('genre', ['genres' => $genres]) --}}
+
+                        {{-- <div class="mb-3 row">
                             <label for="genres" class="col-form-label fw-bold">Жанры</label>
                             <input type="text" class="form-control" name="genres">
                             @error('genres')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
+                        </div> --}}
+
+                        <div class="mb-3 row">
+                            <label for="genres" class="col-form-label fw-bold">Жанры</label>
+                            <div>
+                                @foreach ($default_genres as $default_genre)
+                                    <div class="form-check">
+                                        <label>
+                                            <input type="checkbox" class="form-check-input" name="genres[]"
+                                                value="{{ $default_genre->name }}" />
+                                            {{ $default_genre->name }}
+                                        </label>
+                                    </div>
+                                @endforeach
+                                @error('genres')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
                         </div>
 
                         <div class="mb-4 row">

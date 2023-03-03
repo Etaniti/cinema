@@ -25,7 +25,7 @@ class CreateRequest extends FormRequest
     {
         return [
             'title' => ['required', 'string', 'max:100'],
-            'genres' => ['required', 'string'],
+            'genres' => ['required'],
             'age_limit' => ['required', 'string'],
             'duration' => ['required', 'date_format:h:i'],
             'synopsis' => ['required', 'string', 'max:2000'],

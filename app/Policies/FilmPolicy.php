@@ -18,7 +18,7 @@ class FilmPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -30,7 +30,7 @@ class FilmPolicy
      */
     public function view(User $user, Film $film)
     {
-        //
+        return true;
     }
 
     /**
@@ -41,7 +41,7 @@ class FilmPolicy
      */
     public function create(User $user)
     {
-        //
+        $user->hasRole('admin');
     }
 
     /**
@@ -53,7 +53,7 @@ class FilmPolicy
      */
     public function update(User $user, Film $film)
     {
-        //
+        $user->hasRole('admin');
     }
 
     /**
@@ -65,7 +65,7 @@ class FilmPolicy
      */
     public function delete(User $user, Film $film)
     {
-        //
+        $user->hasRole('admin');
     }
 
     /**

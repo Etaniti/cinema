@@ -24,8 +24,13 @@
                             {{ date('h:i', strtotime($film->duration)) }}</span><br>
                     </p>
                     <p class="text-center">{{ $film->genres }}</p>
-                    <a href="{{ route('films.show', ['film' => $film->id]) }}"
-                        class="btn btn-outline-primary px-5">Подробнее</a>
+                    @role('admin')
+                        <a href="{{ route('films.show', ['film' => $film->id]) }}"
+                            class="btn btn-outline-primary px-5">Подробнее</a>
+                    @else
+                        <a href="{{ route('films.show', ['film' => $film->id]) }}"
+                            class="btn btn-outline-primary px-5">Подробнее</a>
+                    @endrole
                 </div>
             @endforeach
         </div>
