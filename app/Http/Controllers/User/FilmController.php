@@ -23,7 +23,6 @@ class FilmController extends Controller
      */
     public function __construct(FilmService $filmService)
     {
-        $this->authorizeResource(Film::class, 'film');
         $this->filmService = $filmService;
     }
 

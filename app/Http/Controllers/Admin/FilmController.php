@@ -34,6 +34,9 @@ class FilmController extends Controller
      */
     public function index(): View
     {
+        if (!auth()->user()->hasRole('admin')) {
+            abort(404);
+        }
         $films = Film::paginate(20);
         return view('admin.films.index', compact('films'));
     }
@@ -71,6 +74,7 @@ class FilmController extends Controller
      */
     public function show(Film $film): View
     {
+        $this->authorize('show', $film);
         return view('admin.films.show', compact('film'));
     }
 
@@ -108,6 +112,7 @@ class FilmController extends Controller
      */
     public function delete(Film $film): View
     {
+        $this->authorize('delete', $film);
         return view('admin.films.delete', compact('film'));
     }
 

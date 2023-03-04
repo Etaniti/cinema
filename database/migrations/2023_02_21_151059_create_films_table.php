@@ -21,6 +21,8 @@ class CreateFilmsTable extends Migration
             $table->time('duration');
             $table->text('synopsis');
             $table->string('poster')->nullable();
+            $table->date('start');
+            $table->date('end');
             $table->timestamps();
         });
     }

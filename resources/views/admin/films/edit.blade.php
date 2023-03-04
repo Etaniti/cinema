@@ -51,10 +51,26 @@
                             @enderror
                         </div>
 
-                        <div class="mb-4 row">
+                        <div class="mb-5 row">
                             <label for="poster" class="col-form-label fw-bold">Постер</label>
                             <input type="file" class="form-control" name="poster" value="{{ $film->poster }}">
                             @error('poster')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3 row">
+                            <label for="start" class="col-form-label fw-bold">Начало показа</label>
+                            <input type="date" class="form-control" name="start" value="{{ $film->start }}">
+                            @error('start')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="mb-5 row">
+                            <label for="end" class="col-form-label fw-bold">Конец показа</label>
+                            <input type="date" class="form-control" name="end" value="{{ $film->end }}">
+                            @error('end')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>

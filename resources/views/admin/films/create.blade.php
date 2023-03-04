@@ -35,13 +35,28 @@
                             </div>
                         </div>
 
-                        <div class="mb-4 row">
+                        {{-- <div class="mb-4 row">
                             <label for="age_limit" class="col-form-label fw-bold">Возрастное ограничение</label>
                             <input type="text" class="form-control" name="age_limit" value="12+">
                             @error('age_limit')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
+                        </div> --}}
+
+                        <div class="mb-4 row">
+                            <label for="age_limit" class="col-form-label fw-bold">Возрастное ограничение</label>
+                            <select class="form-select" name="age_limit">
+                                <option value="0+">0+</option>
+                                <option value="6+">6+</option>
+                                <option value="12+">12+</option>
+                                <option value="16+">16+</option>
+                                <option value="18+">18+</option>
+                            </select>
+                            @error('age_limit')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
+
 
                         <div class="mb-4 row">
                             <label for="duration" class="col-form-label fw-bold">Длительность</label>
@@ -63,6 +78,24 @@
                             <label for="poster" class="col-form-label fw-bold">Постер</label>
                             <input type="file" class="form-control" name="poster">
                             @error('poster')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3 row">
+                            <label for="start" class="col-form-label fw-bold">Начало показа</label>
+                            <input type="date" class="form-control" name="start"
+                                value="{{ Carbon\Carbon::now()->toDateString() }}">
+                            @error('start')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="mb-5 row">
+                            <label for="end" class="col-form-label fw-bold">Конец показа</label>
+                            <input type="date" class="form-control" name="end"
+                                value="{{ Carbon\Carbon::now()->toDateString() }}">
+                            @error('end')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>

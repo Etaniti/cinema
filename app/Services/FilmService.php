@@ -26,7 +26,7 @@ class FilmService
         // if ($poster !== null) {
         //     $path = $poster->store('public/images');
         //     $visibility = Storage::getVisibility($path);
-        //     Storage::setVisibility($path, 'public');
+        //     $visibility = Storage::setVisibility($path, 'public');
         //     $data['poster'] = $path;
         // }
 
@@ -47,6 +47,12 @@ class FilmService
      */
     public function update($data, Film $film): bool
     {
+        if ($data['poster'] !== null) {
+            $file = $data['poster'];
+            $path = Storage::putFile('public/images', $file, 'public');
+            $data['poster'] = $path;
+        }
+
         return $film->update($data);
     }
 

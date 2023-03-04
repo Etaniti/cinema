@@ -33,6 +33,11 @@ class FilmPolicy
         return true;
     }
 
+    public function show(User $user, Film $film)
+    {
+        return $user->hasRole('admin');
+    }
+
     /**
      * Determine whether the user can create models.
      *

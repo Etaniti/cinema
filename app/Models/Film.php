@@ -16,7 +16,7 @@ class Film extends Model
         'duration',
         'synopsis',
         'poster',
-        // 'start',
-        // 'end',
+        'start',
+        'end',
     ];
 }

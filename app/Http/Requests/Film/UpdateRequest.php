@@ -30,6 +30,8 @@ class UpdateRequest extends FormRequest
             'duration' => ['required'],
             'synopsis' => ['required', 'string', 'max:2000'],
             'poster' => ['nullable', 'image', 'mimes:jpeg,png,jpg', 'max: 3999'],
+            'start' => ['required','date'],
+            'end' => ['required', 'date'],
         ];
     }
 }

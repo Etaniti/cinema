@@ -1,10 +1,12 @@
+@extends('layouts.app')
+
 @section('content')
     <div class="container">
         <div class="d-flex flex-wrap flex-column offset-2" style="width: 70%;">
             <div class="d-flex flex-wrap flex-row justify-content-evenly align-items-start mt-5">
                 <div>
                     @if ($film->poster)
-                        <img src="/storage/{{ $film->poster }}" class="rounded-3">
+                        <img src="{{ asset('storage/app/' . $film->poster) }}" class="rounded-3">
                     @else
                         <svg width="300" height="450" viewBox="0 0 300 450" fill="none"
                             xmlns="http://www.w3.org/2000/svg">

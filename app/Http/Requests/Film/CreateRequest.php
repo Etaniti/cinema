@@ -26,10 +26,12 @@ class CreateRequest extends FormRequest
         return [
             'title' => ['required', 'string', 'max:100'],
             'genres' => ['required'],
-            'age_limit' => ['required', 'string'],
+            'age_limit' => ['required', 'in:0+,6+,12+,16+,18+'],
             'duration' => ['required', 'date_format:h:i'],
             'synopsis' => ['required', 'string', 'max:2000'],
-            'poster' => ['nullable', 'image', 'mimes:jpeg,png,jpg', 'max: 3999'],
+            'poster' => ['nullable', 'image', 'mimes:jpeg,png,jpg', 'max:3999'],
+            'start' => ['required','date', 'after:yesterday'],
+            'end' => ['required', 'date', 'after:start'],
         ];
     }
 }
