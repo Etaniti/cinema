@@ -33,6 +33,13 @@ class FilmPolicy
         return true;
     }
 
+    /**
+     * Determine whether the model can be shown to the user.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Film  $film
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
     public function show(User $user, Film $film)
     {
         return $user->hasRole('admin');
