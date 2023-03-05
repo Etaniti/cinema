@@ -7,7 +7,6 @@ use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\PermissionRegistrar;
 use App\Models\User;
-use App\Models\Film;
 
 class RoleAndPermissionSeeder extends Seeder
 {
@@ -37,13 +36,12 @@ class RoleAndPermissionSeeder extends Seeder
 
         $user->assignRole($admin);
 
-        $film = Film::create([
-            'title' => 'Аватар: Путь воды',
-            'genres' => 'фэнтези, фантастика, приключения',
-            'age_limit' => '12+',
-            'duration' => '3:15',
-            'synopsis' => 'После принятия образа аватара солдат Джейк Салли становится предводителем народа нави и берет на себя миссию по защите новых друзей от корыстных бизнесменов с Земли. Теперь ему есть за кого бороться — с Джейком его прекрасная возлюбленная Нейтири. Когда на Пандору возвращаются до зубов вооруженные земляне, Джейк готов дать им отпор.',
-            'poster' => null,
+        $user = User::create([
+            'firstname' => 'name',
+            'middlename' => 'middlename',
+            'lastname' => 'lastname',
+            'email' => 'test2@test.com',
+            'password' => bcrypt('12345678'),
         ]);
     }
 }

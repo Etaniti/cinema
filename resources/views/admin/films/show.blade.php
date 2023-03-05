@@ -6,7 +6,7 @@
             <div class="d-flex flex-wrap flex-row justify-content-evenly align-items-start mt-5">
                 <div>
                     @if ($film->poster)
-                        <img src="/storage/{{ $film->poster }}" class="rounded-3">
+                        <img src="{{ asset('storage/app/' . $film->poster) }}" class="rounded-3">
                     @else
                         <svg width="300" height="450" viewBox="0 0 300 450" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -26,12 +26,14 @@
                     </p>
                     <p class="text-muted mb-2"><b>Жанры: </b>{{ $film->genres }}</p>
                     <p class="text-wrap mb-5" style="width: 400px;"><b>Описание: </b>{{ $film->synopsis }}</p>
-                    <div class="d-flex flex-column col-8">
-                        <a href="{{ route('films.edit', ['film' => $film->id]) }}"
-                            class="btn btn-outline-primary px-5 py-2 mb-2">Редактировать</a>
-                        <a href="{{ route('films.delete', ['film' => $film->id]) }}"
-                            class="btn btn-outline-danger px-5 py-2">Удалить</a>
-                    </div>
+                    @role('admin')
+                        <div class="d-flex flex-column col-8">
+                            <a href="{{ route('admin_films.edit', ['film' => $film->id]) }}"
+                                class="btn btn-outline-primary px-5 py-2 mb-2">Редактировать</a>
+                            <a href="{{ route('admin_films.delete', ['film' => $film->id]) }}"
+                                class="btn btn-outline-danger px-5 py-2">Удалить</a>
+                        </div>
+                    @endrole
                 </div>
             </div>
         </div>

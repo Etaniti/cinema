@@ -17,6 +17,7 @@
     <!-- Styles -->
     <link rel="stylesheet" type="text/css" href="{{ url('css/app.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url('css/styles.css') }}">
+    @livewireStyles
 </head>
 
 <body style="overflow-auto">
@@ -63,7 +64,7 @@
                                 </li>
                             @else
                                 <li class="nav-item d-flex px-3">
-                                    <a href="#" class="btn btn-outline-dark">Профиль</a>
+                                    <a href="{{ route('profile.index', ['user' => auth()->user()->id]) }}" class="btn btn-outline-dark">Профиль</a>
                                 </li>
                                 <li class="nav-item d-flex">
                                     <a class="btn btn-outline-light text-dark"
@@ -81,6 +82,7 @@
             @yield('content')
         </main>
     </div>
+    @livewireScripts
 </body>
 
 </html>

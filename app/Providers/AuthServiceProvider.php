@@ -26,9 +26,5 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-
-        Gate::define('create-film', [FilmPolicy::class, 'create']);
-        Gate::define('update-film', [FilmPolicy::class, 'update']);
-        Gate::define('delete-film', [FilmPolicy::class, 'delete']);
     }
 }

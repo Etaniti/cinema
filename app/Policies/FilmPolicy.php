@@ -18,7 +18,7 @@ class FilmPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -30,7 +30,19 @@ class FilmPolicy
      */
     public function view(User $user, Film $film)
     {
-        //
+        return true;
+    }
+
+    /**
+     * Determine whether the model can be shown to the user.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Film  $film
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function show(User $user, Film $film)
+    {
+        return $user->hasRole('admin');
     }
 
     /**
@@ -41,7 +53,7 @@ class FilmPolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->hasRole('admin');
     }
 
     /**
@@ -53,7 +65,7 @@ class FilmPolicy
      */
     public function update(User $user, Film $film)
     {
-        //
+        return $user->hasRole('admin');
     }
 
     /**
@@ -65,7 +77,7 @@ class FilmPolicy
      */
     public function delete(User $user, Film $film)
     {
-        //
+        return $user->hasRole('admin');
     }
 
     /**
