@@ -35,14 +35,6 @@
                             </div>
                         </div>
 
-                        {{-- <div class="mb-4 row">
-                            <label for="age_limit" class="col-form-label fw-bold">Возрастное ограничение</label>
-                            <input type="text" class="form-control" name="age_limit" value="12+">
-                            @error('age_limit')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div> --}}
-
                         <div class="mb-4 row">
                             <label for="age_limit" class="col-form-label fw-bold">Возрастное ограничение</label>
                             <select class="form-select" name="age_limit">

@@ -10,8 +10,8 @@ class FilmService
     /**
      * Store a newly created resource in storage.
      *
-     * @param  mixed $data
-     * @return App\Models\Film
+     * @param  mixed $data, $poster
+     * @return \App\Models\Film
      */
     public function store($data, $poster): Film
     {

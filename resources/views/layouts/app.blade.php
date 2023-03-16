@@ -17,12 +17,19 @@
     <!-- Styles -->
     <link rel="stylesheet" type="text/css" href="{{ url('css/app.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url('css/styles.css') }}">
-    @livewireStyles
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+    <!-- Scripts -->
+    <script src="/js/app.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    {{-- <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script> --}}
 </head>
 
 <body style="overflow-auto">
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+    <div id="app" class="content">
+        <nav class="navbar fixed-top navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     Кинотеатр
@@ -64,7 +71,8 @@
                                 </li>
                             @else
                                 <li class="nav-item d-flex px-3">
-                                    <a href="{{ route('profile.index', ['user' => auth()->user()->id]) }}" class="btn btn-outline-dark">Профиль</a>
+                                    <a href="{{ route('profile.index', ['user' => auth()->user()->id]) }}"
+                                        class="btn btn-outline-dark">Личный кабинет</a>
                                 </li>
                                 <li class="nav-item d-flex">
                                     <a class="btn btn-outline-light text-dark"
@@ -77,12 +85,13 @@
             </div>
         </nav>
 
-        <main>
+        <main class="mt-5">
             @yield('sidebar')
             @yield('content')
         </main>
     </div>
     @livewireScripts
+    <script src="{{ mix('js/app.js') }}"></script>
 </body>
 
 </html>

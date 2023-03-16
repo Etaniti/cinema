@@ -27,9 +27,9 @@ class CreateRequest extends FormRequest
             'title' => ['required', 'string', 'max:100'],
             'genres' => ['required'],
             'age_limit' => ['required', 'in:0+,6+,12+,16+,18+'],
-            'duration' => ['required', 'date_format:h:i'],
+            'duration' => ['required', 'date_format:H:i'],
             'synopsis' => ['required', 'string', 'max:2000'],
-            'poster' => ['nullable', 'image', 'mimes:jpeg,png,jpg', 'max:3999'],
+            'poster' => ['nullable', 'image', 'max:3999'],
             'start' => ['required','date', 'after:yesterday'],
             'end' => ['required', 'date', 'after:start'],
         ];

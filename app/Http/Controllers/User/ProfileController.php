@@ -16,7 +16,8 @@ class ProfileController extends Controller
      */
     public function index(): View
     {
-        return view('user.index');
+        $user = auth()->user();
+        return view('user.profile.index', compact('user'));
     }
 
     /**
@@ -55,11 +56,11 @@ class ProfileController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
-    public function edit(User $user)
+    public function edit(User $user): View
     {
-        //
+        return view('user.profile.edit', compact('user'));
     }
 
     /**

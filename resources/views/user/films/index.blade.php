@@ -28,7 +28,7 @@
                         <p class="text-center">{{ $film->genres }}</p>
                     </div>
                     <div>
-                        <a href="{{ route('user_films.show', ['film' => $film->id]) }}"
+                        <a href="{{ route('user-films.show', ['film' => $film->id]) }}"
                             class="btn btn-outline-primary px-5">Подробнее</a>
                     </div>
                 </div>

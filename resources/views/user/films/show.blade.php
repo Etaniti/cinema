@@ -28,6 +28,38 @@
                     <p class="text-wrap mb-5" style="width: 400px;"><b>Описание: </b>{{ $film->synopsis }}</p>
                 </div>
             </div>
+            <div class="d-flex flex-column align-items-center my-5">
+                <h4 class="mb-4">Сеансы фильма</h4>
+                <table class="table table-hover mb-5">
+                    <thead>
+                        <tr>
+                            <th class="text-center align-middle fw-semibold text-muted">№</th>
+                            <th class="text-center align-middle fw-semibold text-muted">Кинозал</th>
+                            <th class="text-center align-middle fw-semibold text-muted">Дата</th>
+                            <th class="text-center align-middle fw-semibold text-muted">Начало сеанса</th>
+                            <th class="text-center align-middle fw-semibold text-muted">Окончание сеанса</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($film->filmSessions as $filmSession)
+                            <tr>
+                                <td class="text-center align-middle">{{ $loop->iteration }}</td>
+                                <td class="text-center align-middle">{{ $filmSession->cinemaHall->name }}</td>
+                                <td class="text-center align-middle">{{ date('d.m.Y', strtotime($filmSession->date)) }}
+                                </td>
+                                <td class="text-center align-middle">{{ date('h:i', strtotime($filmSession->start)) }}
+                                </td>
+                                <td class="text-center align-middle">{{ date('h:i', strtotime($filmSession->end)) }}
+                                </td>
+                                <td class="text-center align-middle">
+                                    <a href="{{ route('reservations.create', ['film_session' => $filmSession->id]) }}"
+                                        class="btn btn-primary">Подробнее</a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 @endsection

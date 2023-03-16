@@ -15,7 +15,7 @@ class AdminController extends Controller
      */
     public function index(): View
     {
-        if (!auth()->user()->hasRole('admin')) {
+        if (!auth()->user() || !auth()->user()->hasRole('admin')) {
             abort(404);
         }
         return view('admin.index');

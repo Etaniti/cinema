@@ -19,4 +19,12 @@ class Film extends Model
         'start',
         'end',
     ];
+
+    /**
+     * Get the film sessions for the film.
+     */
+    public function filmSessions()
+    {
+        return $this->hasMany(FilmSession::class);
+    }
 }

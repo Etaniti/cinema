@@ -18,7 +18,7 @@ class FilmController extends Controller
     /**
      * Instantiate a new controller instance.
      *
-     * @param  mixed App\Services\FilmService
+     * @param  mixed \App\Services\FilmService
      * @return void
      */
     public function __construct(FilmService $filmService)
@@ -34,7 +34,7 @@ class FilmController extends Controller
      */
     public function index(): View
     {
-        if (!auth()->user()->hasRole('admin')) {
+        if (!auth()->user() || !auth()->user()->hasRole('admin')) {
             abort(404);
         }
         $films = Film::paginate(20);
@@ -55,7 +55,7 @@ class FilmController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  App\Http\Requests\CreateRequest  $request
+     * @param  \App\Http\Requests\CreateRequest  $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(CreateRequest $request): RedirectResponse
@@ -86,7 +86,11 @@ class FilmController extends Controller
      */
     public function edit(Film $film): View
     {
-        return view('admin.films.edit', compact('film'));
+        $default_genres = DefaultGenre::all();
+        $genres = $film->genres;
+        // $genres = $genres->explode(', ', (string) $genres);
+        // dd($genres);
+        return view('admin.films.edit', compact('film', 'default_genres', 'genres'));
     }
 
     /**
@@ -101,7 +105,7 @@ class FilmController extends Controller
         $id = $film->id;
         $data = $request->validated();
         $film = $this->filmService->update($data, $film);
-        return redirect()->route('admin_films.show', $id);
+        return redirect()->route('admin_films.show', ['film' => $id]);
     }
 
     /**
