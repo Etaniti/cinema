@@ -62,19 +62,19 @@
                             @endif
                         @else
                             @role('admin')
-                                <li class="nav-item d-flex px-3">
+                                <li id="profile" class="nav-item d-flex px-3">
                                     <a href="{{ route('admin') }}" class="btn btn-outline-primary">Панель администратора</a>
                                 </li>
-                                <li class="nav-item d-flex">
+                                <li id="profile" class="nav-item d-flex">
                                     <a class="btn btn-outline-light text-dark"
                                         href="{{ route('logout') }}">{{ __('Выйти') }}</a>
                                 </li>
                             @else
-                                <li class="nav-item d-flex px-3">
+                                <li id="profile" class="nav-item d-flex px-3">
                                     <a href="{{ route('profile.index', ['user' => auth()->user()->id]) }}"
                                         class="btn btn-outline-dark">Личный кабинет</a>
                                 </li>
-                                <li class="nav-item d-flex">
+                                <li id="logout" class="nav-item d-flex">
                                     <a class="btn btn-outline-light text-dark"
                                         href="{{ route('logout') }}">{{ __('Выйти') }}</a>
                                 </li>

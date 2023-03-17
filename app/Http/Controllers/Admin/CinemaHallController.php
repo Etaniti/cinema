@@ -67,7 +67,7 @@ class CinemaHallController extends Controller
     {
         if ($cinemaHall->seatingChart) {
             $seatingChart = $cinemaHall->seatingChart;
-            $seats = explode(", ", $seatingChart->seats);
+            $seats = json_decode($seatingChart->seats);
             $totalSeats = bcmul($cinemaHall->rows, $cinemaHall->seats_in_row);
         }
         else {

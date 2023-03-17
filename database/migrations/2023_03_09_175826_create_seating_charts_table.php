@@ -16,7 +16,7 @@ class CreateSeatingChartsTable extends Migration
         Schema::create('seating_charts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('cinema_hall_id');
-            $table->longText('seats');
+            $table->json('seats');
             $table->timestamps();
         });
     }

@@ -13,37 +13,57 @@
                                 @if ($cinemaHall->seatingChart)
                                     <div>
                                         <ul
-                                            class="d-flex flex-column justify-content-between align-items-center custom-list me-4 my-2">
+                                            class="d-flex flex-column justify-content-between align-items-center custom-list">
                                             @for ($i = 1; $i < $cinemaHall->rows + 1; $i++)
-                                                <p class="text-muted" style="margin-top: 9px; margin-bottom: 9px;">
-                                                    {{ $i }}</p>
+                                                <li class="text-muted numbers-list">
+                                                    {{ $i }}</li>
                                             @endfor
                                         </ul>
                                     </div>
-                                    <div class="me-4"
-                                        style="column-count: {{ $cinemaHall->seats_in_row }}; column-width: 30px;">
-                                        <ul
-                                            class="d-flex flex-column justify-content-between align-items-center custom-list">
-                                            @for ($i = 1; $i < $totalSeats + 1; $i++)
-                                                @foreach ($seats as $value)
-                                                    @if ($i == $value)
-                                                        <li value="{{ $i }}" data-name="seat"
-                                                            class="form-check-input seat text-sm my-2"><span
-                                                                style="opacity: 0%;">{{ $value }}</span></li>
-                                                    @endif
-                                                @endforeach
-                                                <li value="{{ $i }}" data-name="seat"
-                                                    class="form-check-input seat-unavailable text-muted my-2">
-                                                </li>
-                                            @endfor
-                                        </ul>
+                                    {{-- <div class="d-flex flex-column">
+                                        @for ($i = 1; $i < $cinemaHall->rows + 1; $i++)
+                                            <ul class="d-flex flex-row custom-list">
+                                                @for ($n = 1; $n < $totalSeats + 1; $n++)
+                                                    @foreach ($seats as $key)
+                                                        @foreach ($key as $value)
+                                                            @if ($n == $value)
+                                                                <li id="{{ $n }}" class="form-check-input seat"
+                                                                    value="{{ $value }}">
+                                                                    {{ $n }}
+                                                                </li>
+                                                            @endif
+                                                        @endforeach
+                                                    @endforeach
+                                                    <li id="{{ $i }}"
+                                                        class="form-check-input seat-unavailable text-muted">
+                                                    </li>
+                                                @endfor
+                                            </ul>
+                                        @endfor
+                                    </div> --}}
+                                    <div class="d-flex flex-column">
+                                        @for ($i = 1; $i < $cinemaHall->rows + 1; $i++)
+                                            @foreach ($seats as $key)
+                                                <ul class="d-flex flex-row custom-list">
+                                                    @for ($n = 1; $n < $cinemaHall->seats_in_row + 1; $n++)
+                                                        @foreach ($key as $value)
+                                                        <li>
+                                                            <input type="checkbox" class="form-check-input seat"
+                                                                name="seats[{{ $i }}][{{ $n }}]"
+                                                                value="{{ $n }}" />
+                                                        </li>
+                                                        @endforeach
+                                                    @endfor
+                                                </ul>
+                                            @endforeach
+                                        @endfor
                                     </div>
                                     <div>
                                         <ul
                                             class="d-flex flex-column justify-content-between align-items-center custom-list">
                                             @for ($i = 1; $i < $cinemaHall->rows + 1; $i++)
-                                                <p class="text-muted" style="margin-top: 9px; margin-bottom: 9px;">
-                                                    {{ $i }}</p>
+                                                <li class="text-muted numbers-list">
+                                                    {{ $i }}</li>
                                             @endfor
                                         </ul>
                                     </div>
@@ -82,7 +102,7 @@
             </div>
         </div>
     </div>
-    <script>
+    {{-- <script>
         $(document).ready(function() {
             var found = {};
             $('li').each(function() {
@@ -94,5 +114,5 @@
                 }
             });
         });
-    </script>
+    </script> --}}
 @endsection

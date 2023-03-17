@@ -14,11 +14,13 @@
 }
 
 .seat {
+    float: left;
     width: 25px;
     height: 25px;
     border: 1px solid #0d6efd;
     border-radius: 15%;
     background-color: white;
+    margin: 5px;
 }
 
 .seat:hover {
@@ -34,5 +36,13 @@
 }
 
 .custom-list {
+    display: flex;
     list-style-type: none;
+    margin: 1px;
+}
+
+.numbers-list {
+    display: flex;
+    list-style-type: none;
+    margin: 7px;
 }

@@ -16,5 +16,4 @@ class FilmSessionService
     {
         return $filmSession = FilmSession::create($data);
     }
-
 }

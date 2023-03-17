@@ -5381,6 +5381,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 
 
@@ -5400,7 +5401,6 @@ function getRowNumbers(rows) {
   var rowNumbers = [];
   for (var i = 1; i < rows + 1; i++) {
     var newRowNumbers = rowNumbers.push(i);
-    console.log(rowNumbers);
   }
   var rowItems = rowNumbers.map(function (row) {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
@@ -5418,6 +5418,7 @@ function getRowNumbers(rows) {
 }
 function getSeats(seatsInRow, rows) {
   var seats = [];
+  var rowNumbers = [];
   var totalSeats = seatsInRow * rows;
 
   // function getEmpty(seat) {
@@ -5433,39 +5434,101 @@ function getSeats(seatsInRow, rows) {
   for (var i = 1; i < totalSeats + 1; i++) {
     var newSeats = seats.push(i);
   }
-  var seatItems = seats.map(function (seat) {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
-        type: "checkbox",
-        className: "form-check-input seat my-2",
-        name: "seats[]",
-        value: seat
+  for (var _i = 0; _i < seats.length; _i++) {
+    var newSeats = seats.push(seats.splice(0, seatsInRow));
+  }
+  console.log(seats);
+
+  // while(seats.length) newSeats.push(seats.splice(0,3));
+  // console.log(seats);
+
+  // const seatItems = seats.map((seat) =>
+  //     <li key={seat}>
+  //         {/* {seat} */}
+  //         <input type="checkbox" className="form-check-input seat my-2" name="seats[]" value={seat} />
+  //         {/* {getEmpty(seat)} */}
+  //     </li>
+  // );
+
+  // for (let i = 1; i < rows; i++) {
+  //     let seatItems = seats.map(function (row) {
+  //         return row.map(function (seat) {
+  //             return (
+  //                 <li key={seat}>
+  //                     {seat}
+  //                     <input type="checkbox" className="form-check-input seat my-2" name="seats[i][seats]" value={seat} />
+  //                     {/* {getEmpty(seat)} */}
+  //                 </li>
+  //             )
+  //         });
+  //     });
+  //     return (
+  //         // <div style={seatsList}>
+  //         <div>
+  //             <ul className="custom-list">{seatItems}</ul>
+  //         </div>
+  //     );
+  // };
+
+  for (var _i2 = 1; _i2 < rows + 1; _i2++) {
+    var newRowNumbers = rowNumbers.push(_i2);
+  }
+  var _loop = function _loop(_i3) {
+    var seatItems = seats.map(function (row) {
+      return row.map(function (seat) {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("li", {
+          children: [seat, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+            type: "checkbox",
+            className: "form-check-input seat my-2",
+            name: "seats[i][seats]",
+            value: seat
+          })]
+        }, seat);
+      });
+    });
+    return {
+      v: rowNumbers.map(function (row) {
+        return (
+          /*#__PURE__*/
+          // <div style={seatsList}>
+          (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("ul", {
+              className: "custom-list",
+              children: seatItems[_i3]
+            }, row)
+          })
+        );
       })
-    }, seat);
-  });
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-    style: seatsList,
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("ul", {
-      className: "custom-list",
-      children: seatItems
-    })
-  });
+    };
+  };
+  for (var _i3 = 0; _i3 < rows; _i3++) {
+    var _ret = _loop(_i3);
+    if (_typeof(_ret) === "object") return _ret.v;
+  }
+  ;
 }
+;
 function CinemaHallConstructor() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
       className: "d-flex flex-row justify-content-between mb-5",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-        "class": "d-flex",
+        className: "d-flex",
         children: getRowNumbers(rows)
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-        "class": "d-flex me-4",
+        className: "d-flex flex-column me-4",
         children: getSeats(seatsInRow, rows)
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-        "class": "d-flex",
+        className: "d-flex",
         children: getRowNumbers(rows)
       })]
-    })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
+        children: ["rows ", rows]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
+        children: ["seats in a row ", seatsInRow]
+      })]
+    })]
   });
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CinemaHallConstructor);

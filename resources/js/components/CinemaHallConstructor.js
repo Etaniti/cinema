@@ -19,7 +19,6 @@ function getRowNumbers(rows) {
     var rowNumbers = [];
     for (let i = 1; i < (rows + 1); i++) {
         var newRowNumbers = rowNumbers.push(i);
-        console.log(rowNumbers);
     }
 
     const rowItems = rowNumbers.map((row) =>
@@ -37,55 +36,57 @@ function getRowNumbers(rows) {
 
 function getSeats(seatsInRow, rows) {
     var seats = [];
+    var rowNumbers = [];
     var totalSeats = seatsInRow * rows;
-
-    // function getEmpty(seat) {
-    //     if (seat % seatsInRow == 0) {
-    //         return (
-    //             <div>
-    //                 <p>break</p>
-    //             </div>
-    //         )
-    //     }
-    // }
 
     for (let i = 1; i < (totalSeats + 1); i++) {
         var newSeats = seats.push(i);
     }
 
-    const seatItems = seats.map((seat) =>
-        <li key={seat}>
-            {/* {seat} */}
-            <input type="checkbox" className="form-check-input seat my-2" name="seats[]" value={seat} />
-            {/* {getEmpty(seat)} */}
-        </li>
-    );
+    for (let i = 0; i < seats.length; i++) {
+        var newSeats = seats.push(seats.splice(0, seatsInRow));
+    }
 
-    return (
-        <div style={seatsList}>
-            <ul className="custom-list">{seatItems}</ul>
-        </div>
-    );
-}
+    for (let i = 1; i < (rows + 1); i++) {
+        var newRowNumbers = rowNumbers.push(i);
+    }
+
+    for (let i = 0; i < rows; i++) {
+        let seatItems = seats.map(function (row) {
+            return row.map(function (seat) {
+                return (
+                    <li key={seat}>
+                        {seat}
+                        <input type="checkbox" className="form-check-input seat my-2" name="seats[i][seats]" value={seat} />
+                    </li>
+                )
+            });
+        });
+
+        return rowNumbers.map(function (row) {
+            return (
+                <div>
+                    <ul key={row} className="custom-list">{seatItems[i]}</ul>
+                </div>
+            )
+        });
+    };
+};
 
 function CinemaHallConstructor() {
     return (
         <div>
             <div className="d-flex flex-row justify-content-between mb-5">
-                <div class="d-flex">
+                <div className="d-flex">
                     {getRowNumbers(rows)}
                 </div>
-                <div class="d-flex me-4">
+                <div className="d-flex flex-column me-4">
                     {getSeats(seatsInRow, rows)}
                 </div>
-                <div class="d-flex">
+                <div className="d-flex">
                     {getRowNumbers(rows)}
                 </div>
             </div>
-            {/* <div>
-                <p>rows {rows}</p>
-                <p>seats in a row {seatsInRow}</p>
-            </div> */}
         </div>
     );
 }

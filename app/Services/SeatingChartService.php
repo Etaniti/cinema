@@ -14,7 +14,7 @@ class SeatingChartService
      */
     public function store($data): SeatingChart
     {
-        $data['seats'] = implode(', ', (array) $data['seats']);
+        $data['seats'] = json_encode($data['seats']);
         return $seatingChart = SeatingChart::create($data);
     }
 }
