@@ -24,17 +24,17 @@
                             </ul>
                         </div>
                         <div class="d-flex flex-column">
-                            @for ($i = 1; $i < $cinemaHall->rows + 1; $i++)
+                            @foreach ($seating_chart as $row => $key)
                                 <ul class="d-flex flex-row custom-list">
-                                    @for ($n = 1; $n < $cinemaHall->seats_in_row + 1; $n++)
+                                    @foreach ($key as $value)
                                         <li>
                                             <input type="checkbox" class="form-check-input seat"
-                                                name="seats[{{ $i }}][{{ $n }}]"
-                                                value="{{ $n }}" />
+                                                name="seats[{{ $row }}][{{ $value }}]"
+                                                value="{{ $value }}" />
                                         </li>
-                                    @endfor
+                                    @endforeach
                                 </ul>
-                            @endfor
+                            @endforeach
                         </div>
                         <div>
                             <ul class="d-flex flex-column justify-content-between align-items-center custom-list">

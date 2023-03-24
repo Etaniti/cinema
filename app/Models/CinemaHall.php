@@ -14,6 +14,7 @@ class CinemaHall extends Model
         'name',
         'rows',
         'seats_in_row',
+        'seating_chart',
     ];
 
     /**

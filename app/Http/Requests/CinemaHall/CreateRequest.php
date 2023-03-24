@@ -27,6 +27,7 @@ class CreateRequest extends FormRequest
             'name' => ['required', 'string'],
             'rows' => ['required', 'integer'],
             'seats_in_row' => ['required', 'integer'],
+            'seating_chart' => ['nullable'],
         ];
     }
 }

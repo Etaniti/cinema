@@ -42,7 +42,8 @@ class SeatingChartController extends Controller
     public function create($cinema_hall_id): View
     {
         $cinemaHall = CinemaHall::findOrFail($cinema_hall_id);
-        return view('admin.seating_charts.create', compact('cinema_hall_id', 'cinemaHall'));
+        $seating_chart = json_decode($cinemaHall->seating_chart, true);
+        return view('admin.seating_charts.create', compact('cinema_hall_id', 'cinemaHall', 'seating_chart'));
     }
 
     /**

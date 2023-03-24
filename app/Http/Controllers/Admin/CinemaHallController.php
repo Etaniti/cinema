@@ -65,15 +65,20 @@ class CinemaHallController extends Controller
      */
     public function show(CinemaHall $cinemaHall)
     {
-        if ($cinemaHall->seatingChart) {
-            $seatingChart = $cinemaHall->seatingChart;
-            $seats = json_decode($seatingChart->seats);
-            $totalSeats = bcmul($cinemaHall->rows, $cinemaHall->seats_in_row);
-        }
-        else {
-            return view('admin.cinema_halls.show', compact('cinemaHall'));
-        }
-        return view('admin.cinema_halls.show', compact('cinemaHall', 'seatingChart', 'seats', 'totalSeats'));
+        // if ($cinemaHall->seatingChart) {
+        //     $seatingChart = $cinemaHall->seatingChart;
+        //     $seats = json_decode($seatingChart->seats);
+        //     $totalSeats = bcmul($cinemaHall->rows, $cinemaHall->seats_in_row);
+        // }
+        // else {
+        //     return view('admin.cinema_halls.show', compact('cinemaHall'));
+        // }
+        // return view('admin.cinema_halls.show', compact('cinemaHall', 'seatingChart', 'seats', 'totalSeats'));
+
+        $seatingChart = $cinemaHall->seatingChart;
+        $seats = json_decode($seatingChart->seats, true);
+        $seating_chart = json_decode($cinemaHall->seating_chart, true);
+        return view('admin.cinema_halls.show', compact('cinemaHall', 'seats', 'seating_chart'));
     }
 
     /**
