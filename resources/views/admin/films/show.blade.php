@@ -36,9 +36,9 @@
                     @endrole
                 </div>
             </div>
-            <div class="d-flex flex-column align-items-center mt-5">
+            <div class="d-flex flex-column align-items-center mt-5 mb-3">
                 <h4 class="mb-4">Сеансы фильма</h4>
-                <table class="table table-hover">
+                <table class="table table-striped table-hover">
                     <thead>
                         <tr>
                             <th class="text-center align-middle fw-semibold text-muted">№</th>
@@ -46,18 +46,19 @@
                             <th class="text-center align-middle fw-semibold text-muted">Дата</th>
                             <th class="text-center align-middle fw-semibold text-muted">Начало сеанса</th>
                             <th class="text-center align-middle fw-semibold text-muted">Окончание сеанса</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($film->filmSessions as $filmSession)
+                        @foreach ($filmSessions as $filmSession)
                             <tr>
                                 <td class="text-center align-middle">{{ $loop->iteration }}</td>
                                 <td class="text-center align-middle">{{ $filmSession->cinemaHall->name }}</td>
                                 <td class="text-center align-middle">{{ date('d.m.Y', strtotime($filmSession->date)) }}
                                 </td>
-                                <td class="text-center align-middle">{{ date('h:i', strtotime($filmSession->start)) }}
+                                <td class="text-center align-middle">{{ date('H:i', strtotime($filmSession->start)) }}
                                 </td>
-                                <td class="text-center align-middle">{{ date('h:i', strtotime($filmSession->end)) }}
+                                <td class="text-center align-middle">{{ date('H:i', strtotime($filmSession->end)) }}
                                 </td>
                                 <td class="text-center align-middle">
                                     <a href="#" class="text-decoration-none me-3">Редактировать</a>
@@ -68,7 +69,10 @@
                     </tbody>
                 </table>
             </div>
-            <div class="d-flex flex-column align-items-center mt-5 mb-5">
+            <div class="pagination justify-content-center">
+                {!! $filmSessions->links() !!}
+            </div>
+            <div class="d-flex flex-column align-items-center mt-3 mb-5">
                 <a href="{{ route('admin_film_sessions.create', ['film' => $film]) }}"
                     class="btn btn-primary row col-6 py-3">Добавить сеанс
                     фильма</a>

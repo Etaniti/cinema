@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\SeatingChart;
+namespace App\Http\Requests\Reservation;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -24,9 +24,8 @@ class CreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'cinema_hall_id' => ['required'],
+            'film_session_id' => ['required'],
             'seats' => ['required'],
-            'status' => ['nullable'],
         ];
     }
 }

@@ -32,4 +32,12 @@ class FilmSession extends Model
     {
         return $this->belongsTo(CinemaHall::class);
     }
+
+    /**
+     * Get the reservations for the film session.
+     */
+    public function reservations()
+    {
+        return $this->hasMany(reservation::class);
+    }
 }

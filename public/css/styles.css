@@ -28,16 +28,29 @@
 }
 
 .seat-unavailable {
+    float: left;
     width: 25px;
     height: 25px;
-    border: 1px solid #ffffff;
+    border: 1px solid #F1F3F4;
     border-radius: 15%;
-    background-color: #EAECEE;
+    background-color: #F1F3F4;
+    margin: 5px;
+}
+
+.seat-none {
+    float: left;
+    width: 25px;
+    height: 25px;
+    border: 1px solid #F8FAFC;
+    border-radius: 15%;
+    background-color: #F8FAFC;
+    margin: 5px;
 }
 
 .custom-list {
     display: flex;
     list-style-type: none;
+    padding-left: 1px;
     margin: 1px;
 }
 

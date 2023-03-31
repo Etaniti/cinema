@@ -7,6 +7,7 @@ use App\Http\Requests\Film\CreateRequest;
 use App\Http\Requests\Film\UpdateRequest;
 use App\Models\DefaultGenre;
 use App\Models\Film;
+use App\Models\FilmSession;
 use App\Services\FilmService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
@@ -75,7 +76,10 @@ class FilmController extends Controller
     public function show(Film $film): View
     {
         $this->authorize('show', $film);
-        return view('admin.films.show', compact('film'));
+        $film_id = $film->id;
+        // $filmSession = $film->filmSessions()->where('film_id', $film->id)->simplePaginate(5);
+        $filmSessions = FilmSession::where('film_id', $film->id)->paginate(5);
+        return view('admin.films.show', compact('film', 'filmSessions'));
     }
 
     /**

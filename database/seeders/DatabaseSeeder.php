@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder
             FilmSeeder::class,
             GenreSeeder::class,
             CinemaHallSeeder::class,
+            SeatingChartSeeder::class,
+            FilmSessionSeeder::class,
         ]);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Reservation;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -17,7 +18,8 @@ class ProfileController extends Controller
     public function index(): View
     {
         $user = auth()->user();
-        return view('user.profile.index', compact('user'));
+        $reservations = Reservation::paginate(5);
+        return view('user.profile.index', compact('user', 'reservations'));
     }
 
     /**

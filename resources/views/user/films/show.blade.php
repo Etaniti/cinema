@@ -47,9 +47,9 @@
                                 <td class="text-center align-middle">{{ $filmSession->cinemaHall->name }}</td>
                                 <td class="text-center align-middle">{{ date('d.m.Y', strtotime($filmSession->date)) }}
                                 </td>
-                                <td class="text-center align-middle">{{ date('h:i', strtotime($filmSession->start)) }}
+                                <td class="text-center align-middle">{{ date('H:i', strtotime($filmSession->start)) }}
                                 </td>
-                                <td class="text-center align-middle">{{ date('h:i', strtotime($filmSession->end)) }}
+                                <td class="text-center align-middle">{{ date('H:i', strtotime($filmSession->end)) }}
                                 </td>
                                 <td class="text-center align-middle">
                                     <a href="{{ route('reservations.create', ['film_session' => $filmSession->id]) }}"

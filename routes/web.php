@@ -42,9 +42,9 @@ Route::resource('films', App\Http\Controllers\User\FilmController::class)->names
 Route::resource('film-sessions.reservations', ReservationController::class)->names([
     'create' => 'reservations.create',
     'store' => 'reservations.store',
+    'show' => 'reservations.show',
     'destroy' => 'reservations.destroy',
 ]);
-
 
 // Admin
 Route::get('/admin', [AdminController::class, 'index'])->name('admin');

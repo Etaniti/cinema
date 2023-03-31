@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\CinemaHall;
 use App\Models\SeatingChart;
 
 class SeatingChartService
@@ -14,7 +15,12 @@ class SeatingChartService
      */
     public function store($data): SeatingChart
     {
+        $cinemaHall = CinemaHall::find($data['cinema_hall_id']);
+        if ($data['status'] == 'activated') {
+            $cinemaHall->setStatus('activated');
+        }
         $data['seats'] = json_encode($data['seats']);
         return $seatingChart = SeatingChart::create($data);
+
     }
 }
