@@ -3,6 +3,8 @@
 namespace App\Services;
 
 use App\Models\CinemaHall;
+use App\Models\Seat;
+use App\Statuses\Status;
 
 class CinemaHallService
 {
@@ -10,25 +12,26 @@ class CinemaHallService
      * Store a newly created resource in storage.
      *
      * @param  mixed $data
-     * @return \App\Models\CinemaHall
+     * @return void
      */
-    public function store($data): CinemaHall
+    public function store($data)
     {
-        $row = $data['rows'];
-        $seats_in_row = $data['seats_in_row'];
-        $seating_chart = [];
+        $status = Status::NOT_ACTIVATED;
+        $cinemaHall = CinemaHall::create($data)->setStatus($status);
+
         $seats = [];
-
-        for ($i = 0; $i < $seats_in_row; $i++) {
-            $seats[$i] = array_push($seats, $i);
+        for ($i = 1; $i <= $data['rows']; $i++) {
+            for ($j = 1; $j <= $data['seats_in_row']; $j++) {
+                $seats[] = [
+                    'cinema_hall_id' => $cinemaHall->id,
+                    'row' => $i,
+                    'column' => $j,
+                ];
+            }
         }
 
-        for ($i = 1; $i < $row + 1; $i++) {
-            $seating_chart[$i] = $seats;
-        }
+        $cinemaHall->seats()->createMany($seats);
 
-        $data['seating_chart'] = json_encode($seating_chart);
-
-        return $cinemaHall = CinemaHall::create($data)->setStatus('not_activated');
+        return $cinemaHall;
     }
 }

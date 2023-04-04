@@ -39,11 +39,15 @@
                                         @foreach ($key as $value)
                                             @if (!empty($seats[$row][$value]))
                                                 @if ($value == $seats[$row][$value])
-                                                    <li>
-                                                        <input type="checkbox" class="form-check-input seat"
-                                                            name="seats[{{ $row }}][{{ $value }}]"
-                                                            value="{{ $value }}">
-                                                    </li>
+                                                    {{-- @foreach ($filmSession->reservations as $reservation)
+                                                        @if (!empty($reservation->seats[$row][$value]))
+                                                            <li>
+                                                                <input type="checkbox" class="form-check-input seat"
+                                                                    name="seats[{{ $row }}][{{ $value }}]"
+                                                                    value="{{ $value }}">
+                                                            </li>
+                                                        @endif
+                                                    @endforeach --}}
                                                 @endif
                                             @else
                                                 <li class="form-check-input seat-none"></li>

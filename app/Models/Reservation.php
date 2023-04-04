@@ -20,6 +20,6 @@ class Reservation extends Model
      */
     public function filmSession()
     {
-        return $this->belongsTo(filmSession::class);
+        return $this->belongsTo(FilmSession::class);
     }
 }

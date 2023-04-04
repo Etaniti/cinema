@@ -3,7 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CinemaHallController;
 use App\Http\Controllers\Admin\FilmSessionController;
-use App\Http\Controllers\Admin\SeatingChartController;
+use App\Http\Controllers\Admin\SeatController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\User\ProfileController;
@@ -72,16 +72,16 @@ Route::resource('admin/cinema-halls', CinemaHallController::class)->names([
     'destroy' => 'cinema_halls.destroy',
 ]);
 
-// Seating charts
-Route::resource('cinema-halls.seating-charts', SeatingChartController::class)->shallow()
+// Seats
+Route::resource('cinema-halls.seats', SeatController::class)->shallow()
     ->names([
-        'index' => 'seating_charts.index',
-        'create' => 'seating_charts.create',
-        'store' => 'seating_charts.store',
-        'show' => 'seating_charts.show',
-        'edit' => 'seating_charts.edit',
-        'update' => 'seating_charts.update',
-        'destroy' => 'seating_charts.destroy',
+        'index' => 'seats.index',
+        'create' => 'seats.create',
+        'store' => 'seats.store',
+        'show' => 'seats.show',
+        'edit' => 'seats.edit',
+        'update' => 'seats.update',
+        'destroy' => 'seats.destroy',
     ]);
 
 // Film sessions

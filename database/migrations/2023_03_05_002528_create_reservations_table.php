@@ -16,7 +16,7 @@ class CreateReservationsTable extends Migration
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('film_session_id');
-            $table->longText('seats');
+            $table->json('seats');
             $table->timestamps();
         });
     }

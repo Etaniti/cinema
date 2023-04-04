@@ -83,7 +83,7 @@ class CinemaHallController extends Controller
      */
     public function edit(CinemaHall $cinemaHall)
     {
-        //
+        return view('admin.cinema_halls.edit', compact('cinemaHall'));
     }
 
     /**

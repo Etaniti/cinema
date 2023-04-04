@@ -17,13 +17,13 @@ class CinemaHall extends Model
         'seating_chart',
     ];
 
-    /**
-     * Get the seating chart associated with the cinema hall.
-     */
-    public function seatingChart()
-    {
-        return $this->hasOne(SeatingChart::class);
-    }
+    // /**
+    //  * Get the seating chart associated with the cinema hall.
+    //  */
+    // public function seatingChart()
+    // {
+    //     return $this->hasOne(SeatingChart::class);
+    // }
 
     /**
      * Get the film sessions for the cinema hall.
@@ -31,5 +31,10 @@ class CinemaHall extends Model
     public function filmSessions()
     {
         return $this->hasMany(FilmSession::class);
+    }
+
+    public function seats()
+    {
+        return $this->hasMany(Seat::class);
     }
 }

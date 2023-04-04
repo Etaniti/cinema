@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             CinemaHallSeeder::class,
             SeatingChartSeeder::class,
             FilmSessionSeeder::class,
+            ReservationSeeder::class,
         ]);
     }
 }

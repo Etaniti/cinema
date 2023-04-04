@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSeatingChartsTable extends Migration
+class CreateSeatsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateSeatingChartsTable extends Migration
      */
     public function up()
     {
-        Schema::create('seating_charts', function (Blueprint $table) {
+        Schema::create('seats', function (Blueprint $table) {
             $table->id();
             $table->foreignId('cinema_hall_id');
-            $table->json('seats');
+            $table->integer('row');
+            $table->integer('column');
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class CreateSeatingChartsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('seating_charts');
+        Schema::dropIfExists('seats');
     }
 }

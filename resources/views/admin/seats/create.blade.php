@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="d-flex justify-content-center offset-1">
-            <form action="{{ route('seating_charts.store', ['cinema_hall' => $cinema_hall_id]) }}"
+            <form action="{{ route('seats.store', ['cinema_hall' => $cinema_hall_id]) }}"
                 enctype="multipart/form-data" method="POST">
                 @csrf
                 <div class="mt-5 mb-5">
@@ -24,13 +24,13 @@
                             </ul>
                         </div>
                         <div class="d-flex flex-column">
-                            @foreach ($seating_chart as $row => $key)
+                            @foreach ($cinemaHall->seats->groupBy('row') as $row)
                                 <ul class="d-flex flex-row custom-list">
-                                    @foreach ($key as $value)
+                                    @foreach ($row as $seat)
                                         <li>
                                             <input type="checkbox" class="form-check-input seat"
-                                                name="seats[{{ $row }}][{{ $value }}]"
-                                                value="{{ $value }}" />
+                                                name="seats[{{ $seat->row }}][{{ $seat->column }}]"
+                                                value="{{ $seat->column }}" />
                                         </li>
                                     @endforeach
                                 </ul>

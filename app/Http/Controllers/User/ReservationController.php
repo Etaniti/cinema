@@ -45,6 +45,7 @@ class ReservationController extends Controller
     public function create($film_session_id): View
     {
         $filmSession = FilmSession::findOrFail($film_session_id);
+        // $reservation = $this->reservationService->create($film_session_id);
         $cinemaHall = $filmSession->cinemaHall;
         $seatingChart = $cinemaHall->seatingChart;
         $seats = json_decode($seatingChart->seats, true);

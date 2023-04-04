@@ -38,6 +38,6 @@ class FilmSession extends Model
      */
     public function reservations()
     {
-        return $this->hasMany(reservation::class);
+        return $this->hasMany(Reservation::class);
     }
 }

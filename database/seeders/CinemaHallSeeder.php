@@ -15,13 +15,10 @@ class CinemaHallSeeder extends Seeder
      */
     public function run()
     {
-        $seating_chart = Storage::disk('local')->get('/data/seating_chart.json');
-
         $cinemaHall = CinemaHall::create([
             'name' => 'Малый зал',
             'rows' => 10,
             'seats_in_row' => 15,
-            'seating_chart' => $seating_chart,
         ]);
     }
 }

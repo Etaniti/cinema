@@ -2,24 +2,23 @@
 
 namespace App\Models;
 
-use App\Models\CinemaHall;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\ModelStatus\HasStatuses;
 
-class SeatingChart extends Model
+class Seat extends Model
 {
-    use HasFactory;
+    use HasFactory, HasStatuses;
 
     protected $fillable = [
         'cinema_hall_id',
-        'seats',
+        'row',
+        'column',
+        'status',
     ];
 
-    /**
-     * Get the cinema hall that owns the seating chart.
-     */
     public function cinemaHall()
     {
-        return $this->belongsTo(CinemaHall::class);
+        $this->belongsTo(cinemaHall::class);
     }
 }

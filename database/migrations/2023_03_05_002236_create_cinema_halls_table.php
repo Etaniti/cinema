@@ -18,7 +18,7 @@ class CreateCinemaHallsTable extends Migration
             $table->string('name');
             $table->integer('rows');
             $table->integer('seats_in_row');
-            $table->json('seating_chart')->nullable();
+            $table->string('seating_chart')->nullable();
             $table->timestamps();
         });
     }
