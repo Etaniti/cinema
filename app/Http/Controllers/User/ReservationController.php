@@ -28,9 +28,9 @@ class ReservationController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
-    public function index()
+    public function index(): View
     {
         // $filmSession = FilmSession::get();
         $reservations = Reservation::paginate(5);
@@ -45,12 +45,8 @@ class ReservationController extends Controller
     public function create($film_session_id): View
     {
         $filmSession = FilmSession::findOrFail($film_session_id);
-        // $reservation = $this->reservationService->create($film_session_id);
         $cinemaHall = $filmSession->cinemaHall;
-        $seatingChart = $cinemaHall->seatingChart;
-        $seats = json_decode($seatingChart->seats, true);
-        $seating_chart = json_decode($cinemaHall->seating_chart, true);
-        return view('user.reservations.create', compact('filmSession', 'film_session_id', 'cinemaHall', 'seats', 'seating_chart'));
+        return view('user.reservations.create', compact('filmSession', 'film_session_id', 'cinemaHall'));
     }
 
     /**
@@ -63,18 +59,16 @@ class ReservationController extends Controller
     {
         $data = $request->validated();
         $reservation = $this->reservationService->store($data);
-        // return redirect()->route('reservations.show', ['film_session' => $request->film_session_id, 'reservation' => $reservation->id]);
         return redirect()->route('reservations.index', ['film_session' => $request->film_session_id, 'reservation' => $reservation->id]);
-        // return redirect()->route('reservations.show', ['film_session' => $request->film_session_id, 'reservation' => $reservation->id]);
     }
 
     /**
      * Display the specified resource.
      *
      * @param  \App\Models\Reservation  $reservation
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\View\View
      */
-    public function show(Reservation $reservation): RedirectResponse
+    public function show(Reservation $reservation): View
     {
         $filmSession = FilmSession::findOrFail($film_session_id);
         $cinemaHall = $filmSession->cinemaHall;

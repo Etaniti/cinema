@@ -12,12 +12,14 @@ class CinemaHallService
      * Store a newly created resource in storage.
      *
      * @param  mixed $data
-     * @return void
+     * @return \App\Models\CinemaHall
      */
-    public function store($data)
+    public function store($data): CinemaHall
     {
-        $status = Status::NOT_ACTIVATED;
-        $cinemaHall = CinemaHall::create($data)->setStatus($status);
+        $not_activated = Status::NOT_ACTIVATED;
+        $not_available = Status::NOT_AVAILABLE;
+
+        $cinemaHall = CinemaHall::create($data)->setStatus($not_activated);
 
         $seats = [];
         for ($i = 1; $i <= $data['rows']; $i++) {
@@ -26,11 +28,65 @@ class CinemaHallService
                     'cinema_hall_id' => $cinemaHall->id,
                     'row' => $i,
                     'column' => $j,
+                    'status' => $not_available,
                 ];
             }
         }
 
         $cinemaHall->seats()->createMany($seats);
+
+        return $cinemaHall;
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  mixed $data
+     * @return \App\Models\CinemaHall
+     */
+    public function update($data): CinemaHall
+    {
+        $cinemaHall = CinemaHall::find($data['cinema_hall_id']);
+        $available = Status::AVAILABLE;
+        $not_available = Status::NOT_AVAILABLE;
+        $activated = Status::ACTIVATED;
+        $not_activated = Status::NOT_ACTIVATED;
+
+        if (!empty($data['seats'])) {
+            foreach ($cinemaHall->seats->groupBy('row') as $seats) {
+                foreach ($seats as $seat) {
+                    $seat = Seat::where('id', $seat->id)->update([
+                        'status' => $not_available,
+                    ]);
+                }
+            }
+
+            foreach ($cinemaHall->seats->groupBy('row') as $seats) {
+                foreach ($seats as $seat) {
+                    foreach ($data['seats'] as $row => $key) {
+                        foreach ($key as $value) {
+                            if ($seat->row == $row && $seat->column == $value) {
+                                $availableSeat = Seat::where('id', $seat->id)->update([
+                                    'status' => $available,
+                                ]);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        if (!empty($data['status'])) {
+            if ($data['status'] == $activated) {
+                $cinemaHall->setStatus($activated);
+            }
+        } else {
+            $cinemaHall->setStatus($not_activated);
+        }
+
+        $cinemaHall = $cinemaHall->update([
+            'seating_chart' => $available,
+        ]);
 
         return $cinemaHall;
     }

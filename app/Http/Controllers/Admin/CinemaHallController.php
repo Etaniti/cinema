@@ -4,13 +4,17 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CinemaHall\CreateRequest;
+use App\Http\Requests\Seat\UpdateRequest;
 use App\Models\CinemaHall;
+use App\Models\FilmSession;
 use App\Services\CinemaHallService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 class CinemaHallController extends Controller
 {
+    protected $cinemaHallService;
+
     /**
      * Instantiate a new controller instance.
      *
@@ -19,7 +23,6 @@ class CinemaHallController extends Controller
      */
     public function __construct(CinemaHallService $cinemaHallService)
     {
-        // $this->authorizeResource(Film::class, 'film');
         $this->cinemaHallService = $cinemaHallService;
     }
 
@@ -53,7 +56,7 @@ class CinemaHallController extends Controller
     public function store(CreateRequest $request): RedirectResponse
     {
         $data = $request->validated();
-        $film = $this->cinemaHallService->store($data);
+        $cinemaHall = $this->cinemaHallService->store($data);
         return redirect()->route('cinema_halls.index');
     }
 
@@ -61,27 +64,21 @@ class CinemaHallController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\CinemaHall  $cinemaHall
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
-    public function show(CinemaHall $cinemaHall)
+    public function show(CinemaHall $cinemaHall): View
     {
-        if ($cinemaHall->seatingChart) {
-            $seatingChart = $cinemaHall->seatingChart;
-            $seats = json_decode($seatingChart->seats, true);
-            $seating_chart = json_decode($cinemaHall->seating_chart, true);
-        } else {
-            return view('admin.cinema_halls.show', compact('cinemaHall'));
-        }
-        return view('admin.cinema_halls.show', compact('cinemaHall', 'seats', 'seating_chart'));
+        $filmSessions = FilmSession::paginate(10);
+        return view('admin.cinema_halls.show', compact('cinemaHall', 'filmSessions'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\CinemaHall  $cinemaHall
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
-    public function edit(CinemaHall $cinemaHall)
+    public function edit(CinemaHall $cinemaHall): View
     {
         return view('admin.cinema_halls.edit', compact('cinemaHall'));
     }
@@ -93,9 +90,11 @@ class CinemaHallController extends Controller
      * @param  \App\Models\CinemaHall  $cinemaHall
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, CinemaHall $cinemaHall)
+    public function update(UpdateRequest $request, CinemaHall $cinemaHall)
     {
-        //
+        $data = $request->validated();
+        $cinemaHall = $this->cinemaHallService->update($data);
+        return redirect()->route('cinema_halls.show', ['cinema_hall' => $request->cinema_hall_id]);
     }
 
     /**

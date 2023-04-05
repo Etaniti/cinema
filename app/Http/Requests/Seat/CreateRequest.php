@@ -26,6 +26,7 @@ class CreateRequest extends FormRequest
         return [
             'cinema_hall_id' => ['required'],
             'seats' => ['required'],
+            'status' => ['nullable'],
         ];
     }
 }

@@ -37,6 +37,7 @@ class SeatController extends Controller
     /**
      * Show the form for creating a new resource.
      *
+     * @param  $cinema_hall_id
      * @return \Illuminate\View\View
      */
     public function create($cinema_hall_id): View

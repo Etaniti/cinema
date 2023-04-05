@@ -14,7 +14,9 @@
                             <label for="cinema_hall_id" class="col-form-label fw-bold">Зал кинотеатра</label>
                             <select class="form-select" name="cinema_hall_id">
                                 @foreach ($cinemaHalls as $cinemaHall)
-                                    <option value="{{ $cinemaHall->id }}">{{ $cinemaHall->name }}</option>
+                                    @if ($cinemaHall->latestStatus() == 'activated')
+                                        <option value="{{ $cinemaHall->id }}">{{ $cinemaHall->name }}</option>
+                                    @endif
                                 @endforeach
                             </select>
                             @error('cinema_hall_id')

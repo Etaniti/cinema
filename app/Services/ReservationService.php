@@ -3,36 +3,32 @@
 namespace App\Services;
 
 use App\Models\FilmSession;
+use App\Models\Seat;
 use App\Models\Reservation;
 
 class ReservationService
 {
-    public function create($film_session_id)
-    {
-        $reservations = Reservation::where('film_session_id', $film_session_id)->get();
-        $filmSession = FilmSession::findOrFail($film_session_id);
-        $cinemaHall = $filmSession->cinemaHall;
-        foreach ($reservations as $reservation) {
-            $seats = json_decode($reservation->seats, true);
-            for ($i = 1; $i < $cinemaHall->rows; $i++) {
-                if (!empty($seats[$i])) {
-                    $reserved_seats[$i] = $seats;
-                }
-            }
-        }
-
-        return $reserved_seats;
-    }
-
     /**
      * Store a newly created resource in storage.
      *
      * @param  mixed $data
-     * @return \App\Models\Reservation
+     * @return bool
      */
-    public function store($data): Reservation
+    public function store($data)
     {
-        $data['seats'] = json_encode($data['seats']);
-        return $reservation = Reservation::create($data);
+        $filmSession = FilmSession::find($data['film_session_id']);
+        $cinemaHall = $filmSession->cinemaHall;
+
+        foreach ($cinemaHall->seats->groupBy('row') as $seats) {
+            foreach ($seats as $seat) {
+                foreach ($data['seats'] as $row => $key) {
+                    foreach ($key as $value) {
+                        if ($seat->row == $row && $seat->column == $value) {
+                            $seat = $seat->filmSessions()->attach($seat);
+                        }
+                    }
+                }
+            }
+        }
     }
 }

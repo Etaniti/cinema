@@ -12,20 +12,21 @@ class SeatService
      * Store a newly created resource in storage.
      *
      * @param  mixed $data
-     * @return bool
+     * @return \App\Models\CinemaHall
      */
-    public function store($data): bool
+    public function store($data): CinemaHall
     {
         $cinemaHall = CinemaHall::find($data['cinema_hall_id']);
-        $status = Status::ACTIVE;
+        $availiable = Status::AVAILABLE;
+        $activated = Status::ACTIVATED;
 
         foreach ($cinemaHall->seats->groupBy('row') as $seats) {
             foreach ($seats as $seat) {
                 foreach ($data['seats'] as $row => $key) {
                     foreach ($key as $value) {
                         if ($seat->row == $row && $seat->column == $value) {
-                            $activeSeat = Seat::where('id', $seat->id)->update([
-                                'status' => $status,
+                            $availiableSeat = Seat::where('id', $seat->id)->update([
+                                'status' => $availiable,
                             ]);
                         }
                     }
@@ -33,8 +34,14 @@ class SeatService
             }
         }
 
-        return $cinemaHall = $cinemaHall->update([
-            'seating_chart' => $status,
+        if (!empty($data['status'])) {
+            $cinemaHall->setStatus($activated);
+        }
+
+        $cinemaHall = $cinemaHall->update([
+            'seating_chart' => $availiable,
         ]);
+
+        return $cinemaHall;
     }
 }

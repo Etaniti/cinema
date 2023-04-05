@@ -33,8 +33,6 @@
                             @enderror
                         </div>
 
-                        {{-- <div id="cinema-hall-constructor" data-firstname="{{ $firstname }}"></div> --}}
-
                         <div class="row">
                             <button type="submit" class="btn btn-outline-primary p-3">
                                 Сохранить

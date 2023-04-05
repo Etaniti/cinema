@@ -40,4 +40,9 @@ class FilmSession extends Model
     {
         return $this->hasMany(Reservation::class);
     }
+
+    public function seats()
+    {
+        return $this->belongsToMany(Seat::class, 'film_session_seat', 'film_session_id', 'seat_id')->withTimestamps();
+    }
 }

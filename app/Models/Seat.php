@@ -9,7 +9,6 @@ use Spatie\ModelStatus\HasStatuses;
 class Seat extends Model
 {
     use HasFactory, HasStatuses;
-
     protected $fillable = [
         'cinema_hall_id',
         'row',
@@ -20,5 +19,10 @@ class Seat extends Model
     public function cinemaHall()
     {
         $this->belongsTo(cinemaHall::class);
+    }
+
+    public function filmSessions()
+    {
+        return $this->belongsToMany(FilmSession::class, 'film_session_seat', 'film_session_id', 'seat_id')->withTimestamps();
     }
 }

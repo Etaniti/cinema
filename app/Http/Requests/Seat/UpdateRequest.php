@@ -13,7 +13,7 @@ class UpdateRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,9 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'cinema_hall_id' => ['required'],
+            'seats' => ['nullable'],
+            'status' => ['nullable'],
         ];
     }
 }

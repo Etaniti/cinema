@@ -4,7 +4,8 @@ namespace App\Statuses;
 
 class Status
 {
-    public const NOT_ACTIVATED = 'not_activated';
     public const ACTIVATED = 'activated';
-    public const ACTIVE = 'active';
+    public const NOT_ACTIVATED = 'not_activated';
+    public const AVAILABLE = 'available';
+    public const NOT_AVAILABLE = 'not_available';
 }
