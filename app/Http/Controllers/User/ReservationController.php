@@ -59,7 +59,7 @@ class ReservationController extends Controller
     {
         $data = $request->validated();
         $reservation = $this->reservationService->store($data);
-        return redirect()->route('reservations.index', ['film_session' => $request->film_session_id, 'reservation' => $reservation->id]);
+        return redirect()->route('reservations.show', ['film_session' => $request->film_session_id, 'reservation' => $reservation->id]);
     }
 
     /**
@@ -68,11 +68,10 @@ class ReservationController extends Controller
      * @param  \App\Models\Reservation  $reservation
      * @return \Illuminate\View\View
      */
-    public function show(Reservation $reservation): View
+    public function show(FilmSession $filmSession): View
     {
-        $filmSession = FilmSession::findOrFail($film_session_id);
         $cinemaHall = $filmSession->cinemaHall;
-        return view('reservations.show', compact('reservation', 'filmSession', 'cinemaHall'));
+        return view('user.reservations.show', compact('filmSession', 'cinemaHall'));
     }
 
     /**

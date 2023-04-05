@@ -40,6 +40,7 @@ Route::resource('films', App\Http\Controllers\User\FilmController::class)->names
 
 // Reservations
 Route::resource('film-sessions.reservations', ReservationController::class)->names([
+    'index' => 'reservations.index',
     'create' => 'reservations.create',
     'store' => 'reservations.store',
     'show' => 'reservations.show',
