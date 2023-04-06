@@ -90,7 +90,6 @@
             @yield('content')
         </main>
     </div>
-    @livewireScripts
     <script src="{{ mix('js/app.js') }}"></script>
 </body>
 

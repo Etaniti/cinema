@@ -8,6 +8,7 @@ use App\Models\FilmSession;
 use App\Models\Reservation;
 use App\Services\ReservationService;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
 class ReservationController extends Controller
@@ -33,8 +34,8 @@ class ReservationController extends Controller
     public function index(): View
     {
         // $filmSession = FilmSession::get();
-        $reservations = Reservation::paginate(5);
-        return view('user.reservations.index');
+        $reservations = Reservation::where('user_id', auth()->user()->id)->paginate(5);
+        return view('user.reservations.index', compact('reservations'));
     }
 
     /**
@@ -59,7 +60,12 @@ class ReservationController extends Controller
     {
         $data = $request->validated();
         $reservation = $this->reservationService->store($data);
-        return redirect()->route('reservations.show', ['film_session' => $request->film_session_id, 'reservation' => $reservation->id]);
+        // return redirect()->route('reservations.show');
+        if (!empty($reservation)) {
+            return redirect()->route('reservations.show', ['film_session' => $request->film_session_id, 'reservation' => $reservation]);
+        } else {
+            return redirect()->route('reservations.create', ['film_session' => $request->film_session_id]);
+        }
     }
 
     /**
@@ -68,10 +74,13 @@ class ReservationController extends Controller
      * @param  \App\Models\Reservation  $reservation
      * @return \Illuminate\View\View
      */
-    public function show(FilmSession $filmSession): View
+    public function show(int $reservation): View
     {
+        $reservation = Reservation::findOrFail($reservation);
+        $film_session_id = DB::table('film_session_seat')->where('id', $reservation->film_session_seat_id)->value('film_session_id');
+        $filmSession = FilmSession::findOrFail($film_session_id);
         $cinemaHall = $filmSession->cinemaHall;
-        return view('user.reservations.show', compact('filmSession', 'cinemaHall'));
+        return view('user.reservations.show', compact('reservation', 'filmSession', 'cinemaHall'));
     }
 
     /**

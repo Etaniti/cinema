@@ -23,6 +23,6 @@ class Seat extends Model
 
     public function filmSessions()
     {
-        return $this->belongsToMany(FilmSession::class, 'film_session_seat', 'film_session_id', 'seat_id')->withTimestamps();
+        return $this->belongsToMany(FilmSession::class, 'film_session_seat', 'film_session_id', 'seat_id')->withPivot('user_id')->withTimestamps();
     }
 }

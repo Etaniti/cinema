@@ -53,7 +53,7 @@
                                 </td>
                                 <td class="text-center align-middle">
                                     <a href="{{ route('reservations.create', ['film_session' => $filmSession->id]) }}"
-                                        class="btn btn-primary">Подробнее</a>
+                                        class="btn btn-primary">Забронировать билет</a>
                                 </td>
                             </tr>
                         @endforeach

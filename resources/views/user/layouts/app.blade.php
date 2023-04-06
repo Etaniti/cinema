@@ -8,8 +8,8 @@
                     <h4>Личный кабинет</h4>
                 </li>
                 <li class="nav-item row mx-2 mb-3">
-                    <a href="{{ route('profile.index') }}" class="btn btn-outline-primary text-start">
-                        Мои билеты
+                    <a href="{{ route('reservations.index', ['film_session']) }}" class="btn btn-outline-primary text-start">
+                        Мои бронирования
                     </a>
                 </li>
                 <li class="nav-item row mx-2 mb-3">

@@ -37,6 +37,16 @@
     margin: 5px;
 }
 
+.seat-reserved {
+    float: left;
+    width: 25px;
+    height: 25px;
+    border: 1px solid #dee2e6;
+    border-radius: 15%;
+    background-color: #dee2e6;
+    margin: 5px;
+}
+
 .seat-none {
     float: left;
     width: 25px;

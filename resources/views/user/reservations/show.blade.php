@@ -14,17 +14,19 @@
                         <span class="text-muted">Окончание сеанса:</span>
                         <span class="fw-bold">{{ date('H:i', strtotime($filmSession->end)) }}</span>
                     </p>
-                    <table class="table table-hover">
+                    <table class="table table-hover mb-5">
                         @foreach ($filmSession->seats as $seat)
-                        <tr>
-                            <td class="text-start align-middle fw-bold">№ {{ $loop->iteration }}</td>
-                        </tr>
+                            @if ($seat->pivot->user_id == auth()->user()->id)
+                                <tr>
+                                    <td class="text-start align-middle fw-bold">№ {{ $loop->iteration }}</td>
+                                </tr>
+                            @endif
                         @endforeach
                     </table>
+                    <div class="d-flex flex-row justify-content-center">
+                        <a href="#" class="btn btn-primary px-5 py-3">Прикрепить чек оплаты</a>
+                    </div>
                 </div>
-            </div>
-            <div class="d-flex flex-row justify-content-center mb-5">
-                <button type="submit" class="btn btn-primary px-5 py-3">Продолжить бронирование</button>
             </div>
         </div>
     </div>

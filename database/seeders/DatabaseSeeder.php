@@ -19,7 +19,6 @@ class DatabaseSeeder extends Seeder
             GenreSeeder::class,
             CinemaHallSeeder::class,
             FilmSessionSeeder::class,
-            ReservationSeeder::class,
         ]);
     }
 }

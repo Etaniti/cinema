@@ -33,16 +33,16 @@ class FilmSession extends Model
         return $this->belongsTo(CinemaHall::class);
     }
 
+    public function seats()
+    {
+        return $this->belongsToMany(Seat::class, 'film_session_seat', 'film_session_id', 'seat_id')->withPivot('user_id')->withTimestamps();
+    }
+
     /**
      * Get the reservations for the film session.
      */
     public function reservations()
     {
         return $this->hasMany(Reservation::class);
-    }
-
-    public function seats()
-    {
-        return $this->belongsToMany(Seat::class, 'film_session_seat', 'film_session_id', 'seat_id')->withTimestamps();
     }
 }

@@ -14,8 +14,10 @@ class CreateFilmSessionSeatTable extends Migration
     public function up()
     {
         Schema::create('film_session_seat', function (Blueprint $table) {
+            $table->id();
             $table->unsignedBigInteger('film_session_id');
             $table->unsignedBigInteger('seat_id');
+            $table->unsignedBigInteger('user_id');
             $table->foreign('film_session_id')
                 ->references('id')
                 ->on('film_sessions')

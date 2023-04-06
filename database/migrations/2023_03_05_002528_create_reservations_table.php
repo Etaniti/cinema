@@ -15,8 +15,10 @@ class CreateReservationsTable extends Migration
     {
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('film_session_id');
-            $table->json('seats');
+            $table->foreignId('user_id');
+            $table->foreignId('film_session_seat_id');
+            $table->string('payment_receipt')->nullable();
+            $table->string('status');
             $table->timestamps();
         });
     }

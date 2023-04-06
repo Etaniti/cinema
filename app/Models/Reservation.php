@@ -11,9 +11,19 @@ class Reservation extends Model
     use HasFactory, HasStatuses;
 
     protected $fillable = [
-        'film_session_id',
-        'seats',
+        'user_id',
+        'film_session_seat_id',
+        'payment_receipt',
+        'status',
     ];
+
+    /**
+     * Get the user that owns the reservation.
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     /**
      * Get the film session that owns the reservation.

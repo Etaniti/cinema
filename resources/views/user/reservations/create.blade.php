@@ -18,11 +18,16 @@
                             <span class="fw-bold">{{ date('H:i', strtotime($filmSession->end)) }}</span>
                         </p>
                         <h5 class="fw-bold mb-4">Выберите места</h5>
+                        @if (session('alert'))
+                            <div class="alert alert-danger mb-2">
+                                {{ session('alert') }}
+                            </div>
+                        @endif
                         <div class="text-center">
                             <hr class="border border-primary border-2 mb-1">
                             <p class="text-center mb-4">Экран</p>
                             <input type="text" class="form-control" name="film_session_id" value={{ $film_session_id }}
-                            hidden />
+                                hidden />
                         </div>
                         <div class="d-flex flex-row justify-content-evenly align-items-center mb-4">
                             <div>
@@ -38,13 +43,20 @@
                                     <ul class="d-flex flex-row custom-list">
                                         @foreach ($row as $seat)
                                             @if (DB::table('seats')->where('id', $seat->id)->value('status') == 'available')
-                                                <li>
-                                                    <input type="checkbox" class="form-check-input seat"
-                                                        name="seats[{{ $seat->row }}][{{ $seat->column }}]"
-                                                        value="{{ $seat->column }}" />
-                                                </li>
+                                                @if (
+                                                    !empty(
+                                                        $seat->filmSessions()->where('seat_id', $seat->id)->value('seat_id')
+                                                    ))
+                                                    <li class="form-check-input seat-reserved"></li>
+                                                @else
+                                                    <li>
+                                                        <input type="checkbox" class="form-check-input seat"
+                                                            name="seats[{{ $seat->id }}]"
+                                                            value="{{ $seat->id }}" />
+                                                    </li>
+                                                @endif
                                             @else
-                                                <li class="form-check-input seat-unavailable"></li>
+                                                <li class="form-check-input seat-none"></li>
                                             @endif
                                         @endforeach
                                     </ul>
