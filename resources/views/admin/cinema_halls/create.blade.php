@@ -10,9 +10,9 @@
                         <h4 class="card-title mb-4">Добавление кинозала</h4>
 
                         <div class="mb-4 row">
-                            <label for="name" class="col-form-label fw-bold">Название</label>
-                            <input type="text" class="form-control" name="name">
-                            @error('name')
+                            <label for="title" class="col-form-label fw-bold">Название</label>
+                            <input type="text" class="form-control" name="title">
+                            @error('title')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>

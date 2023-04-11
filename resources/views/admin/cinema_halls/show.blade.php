@@ -5,7 +5,7 @@
         <div class="d-flex justify-content-center offset-1">
             <div class="mt-5 mb-5">
                 <div class="text-center">
-                    <h3>{{ $cinemaHall->name }}</h3>
+                    <h3>{{ $cinemaHall->title }}</h3>
                     <h5 class="text-muted mb-5">Схема рассадки в зале</h5>
                 </div>
                 @if ($cinemaHall->seating_chart)
@@ -50,8 +50,12 @@
                         @else
                             <p class="text-danger border border-danger rounded p-1">Зал неактивен</p>
                         @endif
-                        <a href="{{ route('cinema_halls.edit', ['cinema_hall' => $cinemaHall->id]) }}"
-                            class="btn btn-primary px-5 py-2 mt-1 mb-2">Редактировать кинозал</a>
+                        <div class="d-flex flex-row justify-content-center">
+                            <a href="{{ route('cinema_halls.edit', ['cinema_hall' => $cinemaHall->id]) }}"
+                                class="btn btn-primary px-5 py-2 mt-1 mb-2 me-3">Редактировать кинозал</a>
+                            <a href="{{ route('cinema_halls.delete', ['cinema_hall' => $cinemaHall->id]) }}"
+                                class="btn btn-outline-danger px-5 py-2 mt-1 mb-2">Удалить кинозал</a>
+                        </div>
                     </div>
                 @else
                     <div class="d-flex flex-column justify-content-center align-items-center">
@@ -75,7 +79,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($filmSessions as $filmSession)
+                                @foreach ($cinemaHall->filmSessions as $filmSession)
                                     <tr>
                                         <td class="text-center align-middle">{{ $loop->iteration }}</td>
                                         <td class="text-center align-middle">{{ $filmSession->film->title }}</td>
@@ -85,11 +89,14 @@
                                         <td class="text-center align-middle">
                                             {{ date('H:i', strtotime($filmSession->start)) }}
                                         </td>
-                                        <td class="text-center align-middle">{{ date('H:i', strtotime($filmSession->end)) }}
+                                        <td class="text-center align-middle">
+                                            {{ date('H:i', strtotime($filmSession->end)) }}
                                         </td>
                                         <td class="text-center align-middle">
-                                            <a href="#" class="text-decoration-none me-3">Редактировать</a>
-                                            <a href="#" class="text-decoration-none text-danger">Удалить</a>
+                                            <a href="{{ route('film_sessions.edit', ['film_session' => $filmSession->id]) }}"
+                                                class="text-decoration-none me-3">Редактировать</a>
+                                            <a href="{{ route('film_sessions.delete', ['film_session' => $filmSession->id]) }}"
+                                                class="text-decoration-none text-danger">Удалить</a>
                                         </td>
                                     </tr>
                                 @endforeach

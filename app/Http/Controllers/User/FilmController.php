@@ -3,12 +3,9 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Film\CreateRequest;
-use App\Http\Requests\Film\UpdateRequest;
-use App\Models\DefaultGenre;
 use App\Models\Film;
+use App\Models\FilmSession;
 use App\Services\FilmService;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 class FilmController extends Controller
@@ -38,27 +35,6 @@ class FilmController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  \App\Models\Film  $film
@@ -66,40 +42,8 @@ class FilmController extends Controller
      */
     public function show(Film $film): View
     {
-        return view('user.films.show', compact('film'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Film  $film
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Film $film)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Film  $film
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Film $film)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Film  $film
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Film $film)
-    {
-        //
+        $currentDate = date('Y-m-d');
+        $filmSessions = FilmSession::where('film_id', $film->id)->where('date', '>=', $currentDate)->latest()->paginate(5);
+        return view('user.films.show', compact('film', 'filmSessions'));
     }
 }

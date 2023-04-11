@@ -10,7 +10,7 @@
                     </a>
                 </li>
                 <li value="schedule" class="nav-item row mx-2 mb-3">
-                    <a href="#" class="btn btn-outline-primary text-start">
+                    <a href="{{ route('film_sessions.index') }}" class="btn btn-outline-primary text-start">
                         Расписание
                     </a>
                 </li>
@@ -20,7 +20,7 @@
                     </a>
                 </li>
                 <li value="reservations" class="nav-item row mx-2 mb-3">
-                    <a href="#" class="btn btn-outline-primary text-start">
+                    <a href="{{ route('admin_reservations.index') }}" class="btn btn-outline-primary text-start">
                         Бронирование
                     </a>
                 </li>

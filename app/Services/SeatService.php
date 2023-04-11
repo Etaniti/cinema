@@ -12,9 +12,9 @@ class SeatService
      * Store a newly created resource in storage.
      *
      * @param  mixed $data
-     * @return \App\Models\CinemaHall
+     * @return bool
      */
-    public function store($data): CinemaHall
+    public function store($data): bool
     {
         $cinemaHall = CinemaHall::find($data['cinema_hall_id']);
         $availiable = Status::AVAILABLE;

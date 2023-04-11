@@ -56,14 +56,15 @@ class FilmController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\CreateRequest  $request
+     * @param  \App\Http\Requests\Film\CreateRequest  $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(CreateRequest $request): RedirectResponse
     {
         $data = $request->validated();
-        $poster = $request->poster;
-        $film = $this->filmService->store($data, $poster);
+        // $poster = $request->poster;
+        // $film = $this->filmService->store($data, $poster);
+        $film = $this->filmService->store($data);
         return redirect()->route('admin_films.index');
     }
 
@@ -77,8 +78,8 @@ class FilmController extends Controller
     {
         $this->authorize('show', $film);
         $film_id = $film->id;
-        // $filmSession = $film->filmSessions()->where('film_id', $film->id)->simplePaginate(5);
-        $filmSessions = FilmSession::where('film_id', $film->id)->paginate(5);
+        $currentDate = date('Y-m-d');
+        $filmSessions = FilmSession::where('film_id', $film->id)->where('date', '>=', $currentDate)->latest()->paginate(5);
         return view('admin.films.show', compact('film', 'filmSessions'));
     }
 
@@ -92,8 +93,6 @@ class FilmController extends Controller
     {
         $default_genres = DefaultGenre::all();
         $genres = $film->genres;
-        // $genres = $genres->explode(', ', (string) $genres);
-        // dd($genres);
         return view('admin.films.edit', compact('film', 'default_genres', 'genres'));
     }
 

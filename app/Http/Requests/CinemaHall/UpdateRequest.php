@@ -24,7 +24,10 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title' => ['required', 'string', 'max: 100'],
+            'rows' => ['required', 'integer'],
+            'seats_in_row' => ['required', 'integer'],
+            'seating_chart' => ['nullable'],
         ];
     }
 }

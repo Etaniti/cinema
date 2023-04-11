@@ -21,10 +21,12 @@ class CreateFilmSessionSeatTable extends Migration
             $table->foreign('film_session_id')
                 ->references('id')
                 ->on('film_sessions')
+                ->constrained()
                 ->onDelete('cascade');
             $table->foreign('seat_id')
                 ->references('id')
                 ->on('seats')
+                ->constrained()
                 ->onDelete('cascade');
             $table->timestamps();
         });

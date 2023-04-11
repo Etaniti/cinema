@@ -15,7 +15,7 @@ class CreateSeatsTable extends Migration
     {
         Schema::create('seats', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('cinema_hall_id');
+            $table->foreignId('cinema_hall_id')->constrained()->onDelete('cascade');
             $table->integer('row');
             $table->integer('column');
             $table->string('status')->nullable();

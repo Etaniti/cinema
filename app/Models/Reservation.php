@@ -2,9 +2,12 @@
 
 namespace App\Models;
 
+use App\Statuses\Status;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 use Spatie\ModelStatus\HasStatuses;
+use Illuminate\Support\Facades\Storage;
 
 class Reservation extends Model
 {
@@ -12,10 +15,23 @@ class Reservation extends Model
 
     protected $fillable = [
         'user_id',
+        'film_session_id',
         'film_session_seat_id',
         'payment_receipt',
         'status',
+        'reason_for_denial',
     ];
+
+    public function getFileLink(): string
+    {
+        return Storage::url($this->payment_receipt);
+    }
+
+    public function getStatusLabelAttribute()
+    {
+        $status = DB::table('reservations')->where('id', $this->id)->value('status');
+        return Status::getLabel($status);
+    }
 
     /**
      * Get the user that owns the reservation.

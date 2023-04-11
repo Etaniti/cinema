@@ -42,9 +42,9 @@ class CinemaHallService
      * Update the specified resource in storage.
      *
      * @param  mixed $data
-     * @return \App\Models\CinemaHall
+     * @return bool
      */
-    public function update($data): CinemaHall
+    public function update($data): bool
     {
         $cinemaHall = CinemaHall::find($data['cinema_hall_id']);
         $available = Status::AVAILABLE;
@@ -89,5 +89,17 @@ class CinemaHallService
         ]);
 
         return $cinemaHall;
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  mixed $id
+     * @return bool
+     */
+    public function destroy($id): bool
+    {
+        $film = CinemaHall::findOrFail($id);
+        return $film->destroy($id);
     }
 }

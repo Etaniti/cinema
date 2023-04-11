@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Reservation\CreateRequest;
+use App\Http\Requests\Reservation\UpdateRequest;
 use App\Models\FilmSession;
 use App\Models\Reservation;
 use App\Services\ReservationService;
@@ -60,11 +61,10 @@ class ReservationController extends Controller
     {
         $data = $request->validated();
         $reservation = $this->reservationService->store($data);
-        // return redirect()->route('reservations.show');
         if (!empty($reservation)) {
-            return redirect()->route('reservations.show', ['film_session' => $request->film_session_id, 'reservation' => $reservation]);
+            return redirect()->route('user_reservations.show', ['film_session' => $request->film_session_id, 'reservation' => $reservation]);
         } else {
-            return redirect()->route('reservations.create', ['film_session' => $request->film_session_id]);
+            return redirect()->route('user_reservations.create', ['film_session' => $request->film_session_id]);
         }
     }
 
@@ -84,36 +84,43 @@ class ReservationController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Update the specified resource in storage.
      *
+     * @param  \App\Http\Requests\Reservation\UpdateRequest  $request
      * @param  \App\Models\Reservation  $reservation
-     * @return \Illuminate\Http\Response
+     * @return  \Illuminate\Http\RedirectResponse
      */
-    public function edit(Reservation $reservation)
+    public function update(UpdateRequest $request, int $reservation): RedirectResponse
     {
-        //
+        $reservation = Reservation::findOrFail($reservation);
+        $id = $reservation->id;
+        $data = $request->validated();
+        $reservation = $this->reservationService->update($data, $id);
+        return redirect()->back();
     }
 
     /**
-     * Update the specified resource in storage.
+     * Show the form for deleting the specified resource.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Reservation  $reservation
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
-    public function update(Request $request, Reservation $reservation)
+    public function delete(int $reservation): View
     {
-        //
+        $reservation = Reservation::findOrFail($reservation);
+        return view('user.reservations.delete', compact('reservation'));
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Reservation  $reservation
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(Reservation $reservation)
+    public function destroy(int $reservation): RedirectResponse
     {
-        //
+        $reservation = Reservation::findOrFail($reservation);
+        $reservation = $this->reservationService->destroy($reservation->id);
+        return redirect()->route('profile.index');
     }
 }

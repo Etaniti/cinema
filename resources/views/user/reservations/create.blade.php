@@ -3,12 +3,12 @@
 @section('content')
     <div class="container">
         <div class="d-flex flex-wrap flex-column align-items-center mb-4">
-            <form action="{{ route('reservations.store', ['film_session' => $filmSession->id]) }}"
+            <form action="{{ route('user_reservations.store', ['film_session' => $filmSession->id]) }}"
                 enctype="multipart/form-data" method="POST">
                 @csrf
                 <div class="d-flex align-items-center px-3 py-3">
                     <div class="text-center mt-4">
-                        <h2 class="mb-3">{{ $cinemaHall->name }}</h2>
+                        <h2 class="mb-3">{{ $cinemaHall->title }}</h2>
                         <h4 class="mb-1"><span class="text-muted">Фильм</span> "{{ $filmSession->film->title }}" -
                             {{ date('d.m.Y', strtotime($filmSession->date)) }}</h4>
                         <p class="mb-5">
@@ -43,10 +43,9 @@
                                     <ul class="d-flex flex-row custom-list">
                                         @foreach ($row as $seat)
                                             @if (DB::table('seats')->where('id', $seat->id)->value('status') == 'available')
-                                                @if (
-                                                    !empty(
-                                                        $seat->filmSessions()->where('seat_id', $seat->id)->value('seat_id')
-                                                    ))
+                                                @if (DB::table('reservations')->where(
+                                                            'film_session_seat_id',
+                                                            DB::table('film_session_seat')->where('seat_id', $seat->id)->where('film_session_id', $filmSession->id)->value('id'))->exists())
                                                     <li class="form-check-input seat-reserved"></li>
                                                 @else
                                                     <li>

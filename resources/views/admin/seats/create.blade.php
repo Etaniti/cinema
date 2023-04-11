@@ -8,7 +8,7 @@
                 @csrf
                 <div class="mt-5 mb-5">
                     <div>
-                        <h4 class="card-title text-center mb-5">Создание схемы рассадки зала "{{ $cinemaHall->name }}"</h4>
+                        <h4 class="card-title text-center mb-5">Создание схемы рассадки зала "{{ $cinemaHall->title }}"</h4>
                         <hr class="border border-primary border-2 mb-1">
                         <p class="text-center mb-4">Экран</p>
                         <input type="text" class="form-control" name="cinema_hall_id" value={{ $cinema_hall_id }}

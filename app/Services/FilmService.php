@@ -4,36 +4,25 @@ namespace App\Services;
 
 use App\Models\Film;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class FilmService
 {
     /**
      * Store a newly created resource in storage.
      *
-     * @param  mixed $data, $poster
+     * @param  mixed $data
      * @return \App\Models\Film
      */
-    public function store($data, $poster): Film
+    public function store($data): Film
     {
         $data['genres'] = implode(', ', (array) $data['genres']);
 
-        if ($poster !== null) {
+        if (!empty($data['poster'])) {
             $file = $data['poster'];
-            $path = Storage::putFile('public/images', $file, 'public');
+            $path = Storage::disk('public')->putFile('images', $file);
             $data['poster'] = $path;
         }
-
-        // if ($poster !== null) {
-        //     $path = $poster->store('public/images');
-        //     $visibility = Storage::getVisibility($path);
-        //     $visibility = Storage::setVisibility($path, 'public');
-        //     $data['poster'] = $path;
-        // }
-
-        // if ($poster !== null) {
-        //     $path = $poster->store('images', 'public');
-        //     $data['poster'] = $path;
-        // }
 
         return $film = Film::create($data);
     }
@@ -47,12 +36,13 @@ class FilmService
      */
     public function update($data, Film $film): bool
     {
-        if ($data['poster'] !== null) {
+        if (!empty($data['poster'])) {
             $file = $data['poster'];
-            $path = Storage::putFile('public/images', $file, 'public');
+            $path = Storage::disk('public')->putFile('images', $file);
             $data['poster'] = $path;
         }
 
+        $data['genres'] = implode(', ', (array) $data['genres']);
         return $film->update($data);
     }
 

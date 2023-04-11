@@ -17,25 +17,33 @@ class FilmSessionSeeder extends Seeder
         $filmSession = FilmSession::create([
             'film_id' => 1,
             'cinema_hall_id' => 1,
-            'date' => '2023-03-25',
-            'start' => '18:00:00',
-            'end' => '20:00:00',
+            'date' => '2023-04-12',
+            'start' => '17:00:00',
+            'end' => '20:15:00',
         ]);
 
         $filmSession = FilmSession::create([
             'film_id' => 1,
             'cinema_hall_id' => 1,
-            'date' => '2023-03-25',
-            'start' => '20:00:00',
-            'end' => '22:00:00',
+            'date' => '2023-04-12',
+            'start' => '21:00:00',
+            'end' => '00:15:00',
         ]);
 
         $filmSession = FilmSession::create([
             'film_id' => 1,
             'cinema_hall_id' => 1,
-            'date' => '2023-03-25',
-            'start' => '22:00:00',
-            'end' => '00:00:00',
+            'date' => '2023-04-13',
+            'start' => '17:00:00',
+            'end' => '20:15:00',
+        ]);
+
+        $filmSession = FilmSession::create([
+            'film_id' => 1,
+            'cinema_hall_id' => 1,
+            'date' => '2023-04-13',
+            'start' => '21:00:00',
+            'end' => '00:15:00',
         ]);
     }
 }

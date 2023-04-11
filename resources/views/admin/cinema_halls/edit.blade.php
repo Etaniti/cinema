@@ -11,7 +11,7 @@
                     <div class="mt-5 mb-5">
                         <div>
                             <h4 class="card-title text-center mb-5">Редактирование схемы рассадки зала
-                                "{{ $cinemaHall->name }}"
+                                "{{ $cinemaHall->title }}"
                             </h4>
                             <hr class="border border-primary border-2 mb-1">
                             <p class="text-center mb-4">Экран</p>
@@ -72,7 +72,7 @@
                 @else
                     <div class="mt-5 mb-5">
                         <div>
-                            <h4 class="card-title text-center mb-5">Редактирование зала "{{ $cinemaHall->name }}"
+                            <h4 class="card-title text-center mb-5">Редактирование зала "{{ $cinemaHall->title }}"
                             </h4>
                             <p class="text-muted">Для того, чтобы редактировать схему рассадки, необходимо временно
                                 деактивировать кинозал.</p>

@@ -4,12 +4,12 @@
     <div class="container">
         <div class="d-flex flex-wrap flex-row offset-2">
             @foreach ($films as $film)
-                <div class="d-flex flex-column align-items-center">
-                    <div class="d-flex flex-wrap flex-column align-items-center mt-5" style="width: 250px; height: 450px;">
+                <div class="d-flex flex-column align-items-center me-4">
+                    <div class="d-flex flex-wrap flex-column align-items-center mt-5" style="width: 250px; height: 470px;">
                         <div>
                             @if ($film->poster)
-                                <img src="{{ asset('/storage/app/' . $film->poster) }}" class="rounded-3">
-                                {{-- <img src="/storage/app/public/{{ $film->poster }}" class="rounded-3"> --}}
+                                <img src="{{ $film->getImageLink() }}" class="img-fluid rounded-3"
+                                    style="width: 200px; height: 300px;">
                             @else
                                 <svg width="200" height="300" viewBox="0 0 200 300" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">

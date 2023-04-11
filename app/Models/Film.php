@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Film extends Model
 {
@@ -19,6 +20,11 @@ class Film extends Model
         'start',
         'end',
     ];
+
+    public function getImageLink(): string
+    {
+        return Storage::url($this->poster);
+    }
 
     /**
      * Get the film sessions for the film.

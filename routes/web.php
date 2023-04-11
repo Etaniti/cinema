@@ -7,7 +7,7 @@ use App\Http\Controllers\Admin\SeatController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\User\ProfileController;
-use App\Http\Controllers\User\ReservationController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,13 +39,16 @@ Route::resource('films', App\Http\Controllers\User\FilmController::class)->names
 ]);
 
 // Reservations
-Route::resource('film-sessions.reservations', ReservationController::class)->names([
-    'index' => 'reservations.index',
-    'create' => 'reservations.create',
-    'store' => 'reservations.store',
-    'show' => 'reservations.show',
-    'destroy' => 'reservations.destroy',
-]);
+Route::get('/reservations/{reservation}/delete', [App\Http\Controllers\User\ReservationController::class, 'delete'])->name('user_reservations.delete');
+Route::resource('film-sessions.reservations', App\Http\Controllers\User\ReservationController::class)->shallow()
+    ->names([
+        'index' => 'user_reservations.index',
+        'create' => 'user_reservations.create',
+        'store' => 'user_reservations.store',
+        'show' => 'user_reservations.show',
+        'update' => 'user_reservations.update',
+        'destroy' => 'user_reservations.destroy',
+    ]);
 
 // Admin
 Route::get('/admin', [AdminController::class, 'index'])->name('admin');
@@ -63,6 +66,7 @@ Route::resource('admin/films', App\Http\Controllers\Admin\FilmController::class)
 ]);
 
 // Cinema halls
+Route::get('/admin/cinema-halls/{cinema_hall}/delete', [CinemaHallController::class, 'delete'])->name('cinema_halls.delete');
 Route::resource('admin/cinema-halls', CinemaHallController::class)->names([
     'index' => 'cinema_halls.index',
     'create' => 'cinema_halls.create',
@@ -86,13 +90,24 @@ Route::resource('cinema-halls.seats', SeatController::class)->shallow()
     ]);
 
 // Film sessions
+Route::get('/admin/film-sessions', [FilmSessionController::class, 'index'])->name('film_sessions.index');
+Route::get('/admin/film-sessions/{film_session}/delete', [FilmSessionController::class, 'delete'])->name('film_sessions.delete');
 Route::resource('films.film-sessions', FilmSessionController::class)->shallow()
     ->names([
-        'index' => 'admin_film_sessions.index',
-        'create' => 'admin_film_sessions.create',
-        'store' => 'admin_film_sessions.store',
-        'show' => 'admin_film_sessions.show',
-        'edit' => 'admin_film_sessions.edit',
-        'update' => 'admin_film_sessions.update',
-        'destroy' => 'admin_film_sessions.destroy',
+        'create' => 'film_sessions.create',
+        'store' => 'film_sessions.store',
+        'show' => 'film_sessions.show',
+        'edit' => 'film_sessions.edit',
+        'update' => 'film_sessions.update',
+        'destroy' => 'film_sessions.destroy',
     ]);
+
+// Reservations
+Route::resource('admin/reservations', App\Http\Controllers\Admin\ReservationController::class)->names([
+    'index' => 'admin_reservations.index',
+    'create' => 'admin_reservations.create',
+    'store' => 'admin_reservations.store',
+    'show' => 'admin_reservations.show',
+    'update' => 'admin_reservations.update',
+    'destroy' => 'admin_reservations.destroy',
+]);

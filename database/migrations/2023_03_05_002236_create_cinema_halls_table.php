@@ -15,7 +15,7 @@ class CreateCinemaHallsTable extends Migration
     {
         Schema::create('cinema_halls', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('title');
             $table->integer('rows');
             $table->integer('seats_in_row');
             $table->string('seating_chart')->nullable();

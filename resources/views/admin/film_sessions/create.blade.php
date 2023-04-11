@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="d-flex justify-content-center">
-            <form action="{{ route('admin_film_sessions.store', ['film' => $film_id]) }}" enctype="multipart/form-data"
+            <form action="{{ route('film_sessions.store', ['film' => $film_id]) }}" enctype="multipart/form-data"
                 method="POST">
                 @csrf
                 <div class="card px-4 py-3 mt-5 mb-5">
@@ -15,7 +15,7 @@
                             <select class="form-select" name="cinema_hall_id">
                                 @foreach ($cinemaHalls as $cinemaHall)
                                     @if ($cinemaHall->latestStatus() == 'activated')
-                                        <option value="{{ $cinemaHall->id }}">{{ $cinemaHall->name }}</option>
+                                        <option value="{{ $cinemaHall->id }}">{{ $cinemaHall->title }}</option>
                                     @endif
                                 @endforeach
                             </select>
@@ -36,7 +36,7 @@
 
                         <div class="mb-3 row">
                             <label for="start" class="col-form-label fw-bold">Начало сеанса</label>
-                            <input type="time" class="form-control" name="start" value="02:00">
+                            <input type="time" class="form-control" name="start" value="{{ Carbon\Carbon::now()->format('H:i') }}">
                             @error('start')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -44,7 +44,7 @@
 
                         <div class="mb-4 row">
                             <label for="end" class="col-form-label fw-bold">Окончание сеанса</label>
-                            <input type="time" class="form-control" name="end" value="02:00">
+                            <input type="time" class="form-control" name="end" value="{{ Carbon\Carbon::now()->format('H:i') }}">
                             @error('end')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror

@@ -12,7 +12,7 @@
                         <div class="d-flex flex-wrap flex-column align-items-center mb-2" style="width: 450px; height: 300px;">
                             <div class="d-flex align-items-center card col-10 px-3 py-3">
                                 <div class="card-body text-center">
-                                    <h4 class="fw-bold">{{ $cinemaHall->name }}</h4>
+                                    <h4 class="fw-bold">{{ $cinemaHall->title }}</h4>
                                     <p class="mb-2"><span class="fw-bold">{{ $cinemaHall->rows }}</span> рядов, <span
                                             class="fw-bold">{{ $cinemaHall->seats_in_row }}</span> мест в ряду
                                     </p>

@@ -6,7 +6,8 @@
             <div class="d-flex flex-wrap flex-row justify-content-evenly align-items-start mt-5">
                 <div>
                     @if ($film->poster)
-                        <img src="{{ asset('storage/app/' . $film->poster) }}" class="rounded-3">
+                        <img src="{{ $film->getImageLink() }}" class="img-fluid rounded-3"
+                            style="width: 200px; height: 300px;">
                     @else
                         <svg width="300" height="450" viewBox="0 0 300 450" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -41,21 +42,23 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($film->filmSessions as $filmSession)
-                            <tr>
-                                <td class="text-center align-middle">{{ $loop->iteration }}</td>
-                                <td class="text-center align-middle">{{ $filmSession->cinemaHall->name }}</td>
-                                <td class="text-center align-middle">{{ date('d.m.Y', strtotime($filmSession->date)) }}
-                                </td>
-                                <td class="text-center align-middle">{{ date('H:i', strtotime($filmSession->start)) }}
-                                </td>
-                                <td class="text-center align-middle">{{ date('H:i', strtotime($filmSession->end)) }}
-                                </td>
-                                <td class="text-center align-middle">
-                                    <a href="{{ route('reservations.create', ['film_session' => $filmSession->id]) }}"
-                                        class="btn btn-primary">Забронировать билет</a>
-                                </td>
-                            </tr>
+                        @foreach ($filmSessions as $filmSession)
+                            @if ($filmSession->cinemaHall->latestStatus() == 'activated')
+                                <tr>
+                                    <td class="text-center align-middle">{{ $loop->iteration }}</td>
+                                    <td class="text-center align-middle">{{ $filmSession->cinemaHall->title }}</td>
+                                    <td class="text-center align-middle">{{ date('d.m.Y', strtotime($filmSession->date)) }}
+                                    </td>
+                                    <td class="text-center align-middle">{{ date('H:i', strtotime($filmSession->start)) }}
+                                    </td>
+                                    <td class="text-center align-middle">{{ date('H:i', strtotime($filmSession->end)) }}
+                                    </td>
+                                    <td class="text-center align-middle">
+                                        <a href="{{ route('user_reservations.create', ['film_session' => $filmSession->id]) }}"
+                                            class="btn btn-primary">Забронировать билет</a>
+                                    </td>
+                                </tr>
+                            @endif
                         @endforeach
                     </tbody>
                 </table>

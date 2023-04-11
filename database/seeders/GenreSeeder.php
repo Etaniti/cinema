@@ -49,5 +49,13 @@ class GenreSeeder extends Seeder
         $default_genre = DefaultGenre::create([
             'name' => 'ужасы',
         ]);
+
+        $default_genre = DefaultGenre::create([
+            'name' => 'фантастика',
+        ]);
+
+        $default_genre = DefaultGenre::create([
+            'name' => 'фэнтези',
+        ]);
     }
 }

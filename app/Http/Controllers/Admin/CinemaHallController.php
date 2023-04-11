@@ -98,13 +98,25 @@ class CinemaHallController extends Controller
     }
 
     /**
+     * Show the form for deleting the specified resource.
+     *
+     * @param  \App\Models\CinemaHall  $cinemaHall
+     * @return \Illuminate\View\View
+     */
+    public function delete(CinemaHall $cinemaHall): View
+    {
+        return view('admin.cinema_halls.delete', compact('cinemaHall'));
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\CinemaHall  $cinemaHall
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(CinemaHall $cinemaHall)
     {
-        //
+        $film = $this->cinemaHallService->destroy($cinemaHall->id);
+        return redirect()->route('cinema_halls.index');
     }
 }

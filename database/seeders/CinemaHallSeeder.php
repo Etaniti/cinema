@@ -17,11 +17,13 @@ class CinemaHallSeeder extends Seeder
     public function run()
     {
         $cinemaHall = CinemaHall::create([
-            'name' => 'Малый зал',
+            'title' => 'Малый зал',
             'rows' => 10,
             'seats_in_row' => 15,
             'seating_chart' => Status::AVAILABLE,
         ]);
+
+        $cinemaHall->setStatus(Status::ACTIVATED);
 
         $seats = [];
         for ($i = 1; $i <= $cinemaHall->rows; $i++) {

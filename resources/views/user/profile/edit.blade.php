@@ -37,14 +37,6 @@
                         </div>
 
                         <div class="mb-3 row">
-                            <label for="gender" class="col-form-label fw-bold">Пол</label>
-                            <input type="text" class="form-control" name="gender" value="{{ $user->gender }}">
-                            @error('gender')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-
-                        <div class="mb-3 row">
                             <label for="email" class="col-form-label fw-bold">Адрес электронной почты</label>
                             <input type="text" class="form-control" name="email" value="{{ $user->email }}">
                             @error('email')
@@ -52,10 +44,23 @@
                             @enderror
                         </div>
 
-                        <div class="mb-5 row">
+                        <div class="mb-3 row">
                             <label for="phone" class="col-form-label fw-bold">Номер мобильного телефона</label>
                             <input type="text" class="form-control" name="phone" value="{{ $user->phone }}">
                             @error('phone')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="mb-4 row">
+                            <label for="gender" class="col-form-label fw-bold">Пол</label>
+                            <div class="flex-row justify-content-between">
+                                <input type="radio" class="align-middle" value="male" name="gender">
+                                <label for="gender" class="form-label me-4">Мужской</label>
+                                <input type="radio" class="align-middle" value="female" name="gender" checked>
+                                <label for="gender" class="form-label">Женский</label>
+                            </div>
+                            @error('gender')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>

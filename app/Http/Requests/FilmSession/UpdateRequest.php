@@ -27,8 +27,8 @@ class UpdateRequest extends FormRequest
             'film_id' => ['required', 'integer'],
             'cinema_hall_id' => ['required', 'integer'],
             'date' => ['required', 'date', 'after:yesterday'],
-            'start' => ['reqired', 'date_format:h:i'],
-            'end' => ['reqired', 'date_format:h:i'],
+            'start' => ['required', 'date_format:H:i'],
+            'end' => ['required', 'date_format:H:i'],
         ];
     }
 }

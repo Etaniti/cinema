@@ -8,12 +8,12 @@
                     <h4>Личный кабинет</h4>
                 </li>
                 <li class="nav-item row mx-2 mb-3">
-                    <a href="{{ route('reservations.index', ['film_session']) }}" class="btn btn-outline-primary text-start">
+                    <a href="{{ route('profile.index') }}" class="btn btn-outline-primary text-start">
                         Мои бронирования
                     </a>
                 </li>
                 <li class="nav-item row mx-2 mb-3">
-                    <a href="#" class="btn btn-outline-primary text-start">
+                    <a href="{{ route('profile.show', ['user' => auth()->user()->id]) }}" class="btn btn-outline-primary text-start">
                         Данные профиля
                     </a>
                 </li>

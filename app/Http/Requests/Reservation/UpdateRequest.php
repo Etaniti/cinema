@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\SeatingChart;
+namespace App\Http\Requests\Reservation;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -13,7 +13,7 @@ class UpdateRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,9 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'payment_receipt' => ['nullable', 'file', 'max:4000'],
+            'status' => ['nullable'],
+            'reason_for_denial' => ['nullable', 'string'],
         ];
     }
 }

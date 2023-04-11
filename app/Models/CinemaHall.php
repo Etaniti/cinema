@@ -11,23 +11,12 @@ class CinemaHall extends Model
     use HasFactory, HasStatuses;
 
     protected $fillable = [
-        'name',
+        'title',
         'rows',
         'seats_in_row',
         'seating_chart',
     ];
 
-    // /**
-    //  * Get the seating chart associated with the cinema hall.
-    //  */
-    // public function seatingChart()
-    // {
-    //     return $this->hasOne(SeatingChart::class);
-    // }
-
-    /**
-     * Get the film sessions for the cinema hall.
-     */
     public function filmSessions()
     {
         return $this->hasMany(FilmSession::class);
