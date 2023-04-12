@@ -16,11 +16,17 @@ class Seat extends Model
         'status',
     ];
 
+    /**
+     * Get the cinema hall that owns the seat.
+     */
     public function cinemaHall()
     {
         $this->belongsTo(cinemaHall::class);
     }
 
+    /**
+     * The film sessions that belong to the seat.
+     */
     public function filmSessions()
     {
         return $this->belongsToMany(FilmSession::class, 'film_session_seat', 'film_session_id', 'seat_id')->withPivot('user_id')->withTimestamps();

@@ -11,13 +11,24 @@ use Illuminate\Http\RedirectResponse;
 class ReservationController extends Controller
 {
     /**
+     * Instantiate a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->authorizeResource(Reservation::class, 'reservation');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\View\View
      */
     public function index(): View
     {
-        $reservations = Reservation::all();
+        $this->authorize('viewAny', Reservation::class);
+        $reservations = Reservation::paginate(15);
         return view('admin.reservations.index', compact('reservations'));
     }
 
@@ -29,6 +40,7 @@ class ReservationController extends Controller
      */
     public function show(Reservation $reservation): View
     {
+        $this->authorize('view', $reservation);
         return view('admin.reservations.show', compact('reservation'));
     }
 }

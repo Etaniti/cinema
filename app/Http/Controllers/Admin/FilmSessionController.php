@@ -23,7 +23,6 @@ class FilmSessionController extends Controller
      */
     public function __construct(FilmSessionService $filmSessionService)
     {
-        // $this->authorizeResource(FilmSession::class, 'film');
         $this->filmSessionService = $filmSessionService;
     }
 
@@ -54,24 +53,13 @@ class FilmSessionController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(CreateRequest $request)
+    public function store(CreateRequest $request): RedirectResponse
     {
         $data = $request->validated();
         $filmSession = $this->filmSessionService->store($data);
         return redirect()->route('admin_films.show', ['film' => $request->film_id]);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\FilmSession  $filmSession
-     * @return \Illuminate\Http\Response
-     */
-    public function show(FilmSession $filmSession)
-    {
-        //
     }
 
     /**
@@ -89,11 +77,11 @@ class FilmSessionController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\FilmSession\UpdateRequest  $request
      * @param  \App\Models\FilmSession  $filmSession
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(UpdateRequest $request, FilmSession $filmSession)
+    public function update(UpdateRequest $request, FilmSession $filmSession): RedirectResponse
     {
         $data = $request->validated();
         $id = $filmSession->id;

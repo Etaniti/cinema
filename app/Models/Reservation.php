@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Statuses\Status;
+use App\Enums\Statuses\Status;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -22,12 +22,22 @@ class Reservation extends Model
         'reason_for_denial',
     ];
 
+    /**
+     * Get the link for reservation payment receipt.
+     *
+     * @return string
+     */
     public function getFileLink(): string
     {
         return Storage::url($this->payment_receipt);
     }
 
-    public function getStatusLabelAttribute()
+    /**
+     * Get the label for reservation status.
+     *
+     * @return string
+     */
+    public function getStatusLabelAttribute(): string
     {
         $status = DB::table('reservations')->where('id', $this->id)->value('status');
         return Status::getLabel($status);

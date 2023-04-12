@@ -62,8 +62,6 @@ class FilmController extends Controller
     public function store(CreateRequest $request): RedirectResponse
     {
         $data = $request->validated();
-        // $poster = $request->poster;
-        // $film = $this->filmService->store($data, $poster);
         $film = $this->filmService->store($data);
         return redirect()->route('admin_films.index');
     }
@@ -76,7 +74,6 @@ class FilmController extends Controller
      */
     public function show(Film $film): View
     {
-        $this->authorize('show', $film);
         $film_id = $film->id;
         $currentDate = date('Y-m-d');
         $filmSessions = FilmSession::where('film_id', $film->id)->where('date', '>=', $currentDate)->latest()->paginate(5);
@@ -99,7 +96,7 @@ class FilmController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Film\UpdateRequest  $request
      * @param  \App\Models\Film  $film
      * @return \Illuminate\Http\RedirectResponse
      */

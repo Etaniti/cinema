@@ -45,6 +45,9 @@ class ProfileController extends Controller
      */
     public function show(User $user): View
     {
+        if (auth()->user()->id != $user->id ) {
+            abort(404);
+        }
         return view('user.profile.show', compact('user'));
     }
 
@@ -56,6 +59,9 @@ class ProfileController extends Controller
      */
     public function edit(User $user): View
     {
+        if (auth()->user()->id != $user->id ) {
+            abort(404);
+        }
         return view('user.profile.edit', compact('user'));
     }
 
@@ -64,7 +70,7 @@ class ProfileController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(UpdateRequest $request, User $user): RedirectResponse
     {

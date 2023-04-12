@@ -54,7 +54,7 @@
                 </div>
                 <div>
                     <a href="{{ route('user_reservations.delete', ['reservation' => $reservation->id]) }}"
-                        class="btn btn-outline-danger px-5 py-2 mt-1 mb-2">Отменить бронирование</a>
+                        class="btn btn-outline-danger px-5 py-2 mt-1 mb-4">Отменить бронирование</a>
                 </div>
                 @if (DB::table('reservations')->where('id', $reservation->id)->value('status') == 'pending_payment' && $reservation->payment_receipt == null)
                     <div id="form" class=" col-md-12 hidden">

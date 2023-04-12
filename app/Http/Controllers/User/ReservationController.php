@@ -34,7 +34,6 @@ class ReservationController extends Controller
      */
     public function index(): View
     {
-        // $filmSession = FilmSession::get();
         $reservations = Reservation::where('user_id', auth()->user()->id)->paginate(5);
         return view('user.reservations.index', compact('reservations'));
     }
@@ -71,12 +70,12 @@ class ReservationController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Reservation  $reservation
+     * @param  int  $reservationId
      * @return \Illuminate\View\View
      */
-    public function show(int $reservation): View
+    public function show(int $reservationId): View
     {
-        $reservation = Reservation::findOrFail($reservation);
+        $reservation = Reservation::findOrFail($reservationId);
         $film_session_id = DB::table('film_session_seat')->where('id', $reservation->film_session_seat_id)->value('film_session_id');
         $filmSession = FilmSession::findOrFail($film_session_id);
         $cinemaHall = $filmSession->cinemaHall;
@@ -87,12 +86,12 @@ class ReservationController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\Reservation\UpdateRequest  $request
-     * @param  \App\Models\Reservation  $reservation
+     * @param  int  $reservationId
      * @return  \Illuminate\Http\RedirectResponse
      */
-    public function update(UpdateRequest $request, int $reservation): RedirectResponse
+    public function update(UpdateRequest $request, int $reservationId): RedirectResponse
     {
-        $reservation = Reservation::findOrFail($reservation);
+        $reservation = Reservation::findOrFail($reservationId);
         $id = $reservation->id;
         $data = $request->validated();
         $reservation = $this->reservationService->update($data, $id);
@@ -102,24 +101,24 @@ class ReservationController extends Controller
     /**
      * Show the form for deleting the specified resource.
      *
-     * @param  \App\Models\Reservation  $reservation
+     * @param  int  $reservationId
      * @return \Illuminate\View\View
      */
-    public function delete(int $reservation): View
+    public function delete(int $reservationId): View
     {
-        $reservation = Reservation::findOrFail($reservation);
+        $reservation = Reservation::findOrFail($reservationId);
         return view('user.reservations.delete', compact('reservation'));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Reservation  $reservation
+     * @param  int  $reservationId
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(int $reservation): RedirectResponse
+    public function destroy(int $reservationId): RedirectResponse
     {
-        $reservation = Reservation::findOrFail($reservation);
+        $reservation = Reservation::findOrFail($reservationId);
         $reservation = $this->reservationService->destroy($reservation->id);
         return redirect()->route('profile.index');
     }

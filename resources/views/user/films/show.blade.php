@@ -39,6 +39,7 @@
                             <th class="text-center align-middle fw-semibold text-muted">Дата</th>
                             <th class="text-center align-middle fw-semibold text-muted">Начало сеанса</th>
                             <th class="text-center align-middle fw-semibold text-muted">Окончание сеанса</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -53,10 +54,17 @@
                                     </td>
                                     <td class="text-center align-middle">{{ date('H:i', strtotime($filmSession->end)) }}
                                     </td>
-                                    <td class="text-center align-middle">
-                                        <a href="{{ route('user_reservations.create', ['film_session' => $filmSession->id]) }}"
-                                            class="btn btn-primary">Забронировать билет</a>
-                                    </td>
+                                    @if (auth()->user())
+                                        <td class="text-center align-middle">
+                                            <a href="{{ route('user_reservations.create', ['film_session' => $filmSession->id]) }}"
+                                                class="btn btn-primary">Забронировать билет</a>
+                                        </td>
+                                    @else
+                                        <td class="text-center align-middle">
+                                            <a href="{{ route('register') }}"
+                                                class="btn btn-primary">Забронировать билет</a>
+                                        </td>
+                                    @endif
                                 </tr>
                             @endif
                         @endforeach

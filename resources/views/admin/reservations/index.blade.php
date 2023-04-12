@@ -7,7 +7,7 @@
                 <div class="mt-3">
                     <h2 class="mb-4">Бронирования</h2>
                     <div>
-                        <table class="table table-striped table-hover mb-5">
+                        <table class="table table-striped table-hover mb-3">
                             <tr>
                                 <th></th>
                                 <th class="text-center align-middle">Пользователь</th>
@@ -52,8 +52,8 @@
                     </div>
                 </div>
             </div>
-            <div class="ms-3">
-                {{-- {!! $reservations->links() !!} --}}
+            <div class="ms-3 mb-5">
+                {!! $reservations->links() !!}
             </div>
         </div>
     </div>

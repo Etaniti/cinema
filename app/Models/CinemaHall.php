@@ -17,11 +17,17 @@ class CinemaHall extends Model
         'seating_chart',
     ];
 
+    /**
+     * Get the film sessions for the cinema hall.
+     */
     public function filmSessions()
     {
         return $this->hasMany(FilmSession::class);
     }
 
+    /**
+     * Get the seats for the cinema hall.
+     */
     public function seats()
     {
         return $this->hasMany(Seat::class);

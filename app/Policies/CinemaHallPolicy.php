@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Film;
+use App\Models\CinemaHall;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class FilmPolicy
+class CinemaHallPolicy
 {
     use HandlesAuthorization;
 
@@ -16,33 +16,21 @@ class FilmPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function viewAny(User $user)
+    public function viewAny(User $user): bool
     {
-        return true;
+        return $user->hasRole('admin');
     }
 
     /**
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Film  $film
+     * @param  \App\Models\CinemaHall  $cinemaHall
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Film $film)
+    public function view(User $user, CinemaHall $cinemaHall): bool
     {
-        return true;
-    }
-
-    /**
-     * Determine whether the model can be shown to the user.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Film  $film
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function show(User $user, Film $film)
-    {
-        return true;
+        return $user->hasRole('admin');
     }
 
     /**
@@ -51,7 +39,7 @@ class FilmPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create(User $user)
+    public function create(User $user): bool
     {
         return $user->hasRole('admin');
     }
@@ -60,10 +48,10 @@ class FilmPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Film  $film
+     * @param  \App\Models\CinemaHall  $cinemaHall
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Film $film)
+    public function update(User $user, CinemaHall $cinemaHall): bool
     {
         return $user->hasRole('admin');
     }
@@ -72,10 +60,10 @@ class FilmPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Film  $film
+     * @param  \App\Models\CinemaHall  $cinemaHall
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Film $film)
+    public function delete(User $user, CinemaHall $cinemaHall): bool
     {
         return $user->hasRole('admin');
     }

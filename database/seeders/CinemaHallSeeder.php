@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\CinemaHall;
 use App\Models\Seat;
-use App\Statuses\Status;
+use App\Enums\Statuses\Status;
 use Illuminate\Database\Seeder;
 
 class CinemaHallSeeder extends Seeder

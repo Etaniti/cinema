@@ -2,10 +2,13 @@
 
 namespace App\Providers;
 
-use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Gate;
-use App\Policies\FilmPolicy;
+use App\Models\CinemaHall;
 use App\Models\Film;
+use App\Models\Reservation;
+use App\Policies\CinemaHallPolicy;
+use App\Policies\FilmPolicy;
+use App\Policies\ReservationPolicy;
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -16,6 +19,8 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         Film::class => FilmPolicy::class,
+        CinemaHall::class => CinemaHallPolicy::class,
+        Reservation::class => ReservationPolicy::class,
     ];
 
     /**

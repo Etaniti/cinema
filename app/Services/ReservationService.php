@@ -2,13 +2,13 @@
 
 namespace App\Services;
 
+use App\Enums\Statuses\Status;
+use App\Jobs\SendEmailReservationStatus;
 use App\Models\FilmSession;
 use App\Models\Reservation;
 use App\Models\Seat;
-use App\Statuses\Status;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use App\Jobs\SendEmailReservationStatus;
 
 class ReservationService
 {
@@ -50,9 +50,10 @@ class ReservationService
      * Update the specified resource in storage.
      *
      * @param  mixed $data
+     * @param  mixed $id
      * @return bool
      */
-    public function update($data, $id): Reservation
+    public function update($data, $id): ?Reservation
     {
         if (!empty($data['payment_receipt'])) {
             $reservation = Reservation::findOrFail($id);
@@ -74,6 +75,11 @@ class ReservationService
                 'status' => $data['status'],
                 'reason_for_denial' => $data['reason_for_denial'],
             ]);
+
+            if ($data['status'] == Status::DENIED) {
+                DB::table('film_session_seat')->where('id', $reservation->film_session_id)->delete();
+                return $reservation;
+            }
 
             dispatch(new SendEmailReservationStatus($reservation));
         }

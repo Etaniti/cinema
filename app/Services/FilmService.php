@@ -31,7 +31,7 @@ class FilmService
      * Update the specified resource in storage.
      *
      * @param  mixed $data
-     * @param  mixed $id
+     * @param  \App\Models\Film  $film
      * @return bool
      */
     public function update($data, Film $film): bool

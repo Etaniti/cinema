@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Statuses;
+namespace App\Enums\Statuses;
 
 class Status
 {

@@ -21,6 +21,11 @@ class Film extends Model
         'end',
     ];
 
+    /**
+     * Get the link for film poster.
+     *
+     * @return string
+     */
     public function getImageLink(): string
     {
         return Storage::url($this->poster);

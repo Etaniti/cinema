@@ -6,6 +6,13 @@ use App\Models\User;
 
 class ProfileService
 {
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  mixed $data
+     * @param  mixed $id
+     * @return bool
+     */
     public function update($data, $id): bool
     {
         $user = User::findOrFail($id);

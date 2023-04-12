@@ -4,7 +4,7 @@ namespace App\Services;
 
 use App\Models\CinemaHall;
 use App\Models\Seat;
-use App\Statuses\Status;
+use App\Enums\Statuses\Status;
 
 class SeatService
 {
